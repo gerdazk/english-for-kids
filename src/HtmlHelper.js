@@ -1,5 +1,5 @@
 function create({
-  name, text, type, id, handleClick,
+  name, text, type, id, handleClick, data, handleMouseLeave,
 }) {
   const element = document.createElement(name);
   if (type) {
@@ -10,12 +10,20 @@ function create({
     element.innerHTML = text;
   }
 
+  if (data) {
+    element.innerHTML = data.name;
+    element.setAttribute('data', JSON.stringify(data));
+  }
+
   if (id) {
     element.id = id;
   }
 
   if (handleClick) {
     element.addEventListener('click', handleClick);
+  }
+  if (handleMouseLeave) {
+    element.addEventListener('mouseleave', handleMouseLeave);
   }
 
   return element;
@@ -26,4 +34,8 @@ function append(parent, child) {
   return parent;
 }
 
-module.exports = { append, create };
+function changeInnerText(id, text) {
+  document.getElementById(id).innerHTML = text;
+}
+
+module.exports = { append, create, changeInnerText };
