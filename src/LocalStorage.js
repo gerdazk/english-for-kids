@@ -1,10 +1,9 @@
-function set(key, value) {
-  console.log('localst', localStorage.getItem(key));
+function setSwitch(key, value) {
   return localStorage.setItem(key, value);
 }
 
-function get(key) {
+function getSwitch(key) {
   return localStorage.getItem(key);
 }
 
-module.exports = { set, get };
+module.exports = { setSwitch, getSwitch };
