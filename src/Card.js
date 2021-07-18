@@ -1,10 +1,12 @@
 const htmlHelper = require('./HtmlHelper');
 const SoundPlayer = require('./SoundPlayer');
+const LocalStorage = require('./LocalStorage');
 
 const handleClick = (e) => {
   const data = JSON.parse(e.target.getAttribute('data'));
   SoundPlayer.play(data.name);
   htmlHelper.changeInnerText(e.target.id, data.nameLT);
+  LocalStorage.changeStatistics(data.name, 'clicked');
 };
 
 const handleMouseLeave = (e) => {
