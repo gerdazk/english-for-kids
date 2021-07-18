@@ -11,7 +11,9 @@ function create({
   }
 
   if (data) {
-    element.innerHTML = data.name;
+    if (data.name) {
+      element.innerHTML = data.name;
+    }
     element.setAttribute('data', JSON.stringify(data));
   }
 

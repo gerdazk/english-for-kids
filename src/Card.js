@@ -1,25 +1,25 @@
-const htmlHelper = require('./HtmlHelper');
+const HtmlHelper = require('./HtmlHelper');
 const SoundPlayer = require('./SoundPlayer');
 const LocalStorage = require('./LocalStorage');
 
 const handleClick = (e) => {
   const data = JSON.parse(e.target.getAttribute('data'));
   SoundPlayer.play(data.name);
-  htmlHelper.changeInnerText(e.target.id, data.nameLT);
+  HtmlHelper.changeInnerText(e.target.id, data.nameLT);
   LocalStorage.changeStatistics(data.name, 'clicked');
 };
 
 const handleMouseLeave = (e) => {
   const data = JSON.parse(e.target.getAttribute('data'));
   if (e.target.innerHTML === data.nameLT) {
-    htmlHelper.changeInnerText(e.target.id, data.name);
+    HtmlHelper.changeInnerText(e.target.id, data.name);
   }
 };
 
 const create = (parentElement, categoryData) => {
-  htmlHelper.append(
+  HtmlHelper.append(
     parentElement,
-    htmlHelper.create({
+    HtmlHelper.create({
       name: 'div',
       handleClick,
       id: categoryData.name,
