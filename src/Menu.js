@@ -1,5 +1,6 @@
 const data = require('./data');
 const HtmlHelper = require('./HtmlHelper');
+const Statistics = require('./Statistics');
 
 const handleClick = () => {
   const menu = document.getElementById('menuIcon');
@@ -15,7 +16,28 @@ const handleClick = () => {
   menu.setAttribute('data', JSON.stringify(menuData));
 };
 
-const create = () => {
+const onStatisticsClick = () => {
+  Statistics.create(data);
+};
+
+const createButtons = (onMenuClick) => {
+  data.getAllCategories().forEach((category) => {
+    HtmlHelper.append(
+      document.getElementById('menuContainer'),
+      HtmlHelper.create({
+        text: category, id: `menu${category}`, name: 'button', handleClick: onMenuClick,
+      }),
+    );
+  });
+  HtmlHelper.append(
+    document.getElementById('menuContainer'),
+    HtmlHelper.create({
+      text: 'statistics', id: 'menuStatistics', name: 'button', handleClick: onStatisticsClick,
+    }),
+  );
+};
+
+const create = (onMenuClick) => {
   HtmlHelper.append(
     document.body,
     HtmlHelper.create({
@@ -31,17 +53,7 @@ const create = () => {
     HtmlHelper.create({ id: 'menuContainer', name: 'div' }),
   );
   document.getElementById('menuContainer').style.display = 'none';
-};
-
-const createButtons = () => {
-  const keys = Object.keys(data.cards);
-  for (let i = 0; i < keys.length; i += 1) {
-    HtmlHelper.append(
-      document.getElementById('menuContainer'),
-      HtmlHelper.create({ text: keys[i], id: `menu${keys[i]}`, name: 'button' }),
-    );
-    Object.keys(data.cards[keys[i]]);
-  }
+  createButtons(onMenuClick);
 };
 
 module.exports = { create, createButtons };

@@ -1,3 +1,5 @@
+const data = require('./data');
+
 function setSwitch(key, value) {
   return localStorage.setItem(key, value);
 }
@@ -7,36 +9,34 @@ function getSwitch(key) {
 }
 
 function changeStatistics(name, key) {
-  const data = JSON.parse(localStorage.getItem(name));
+  const storedData = JSON.parse(localStorage.getItem(name));
   if (key === 'clicked') {
-    data.clicked += 1;
+    storedData.clicked += 1;
   }
   if (key === 'state') {
-    if (data.state) {
-      data.state = false;
+    if (storedData.state) {
+      storedData.state = false;
     } else {
-      data.state = true;
+      storedData.state = true;
     }
   }
-  localStorage.setItem(name, JSON.stringify(data));
+  localStorage.setItem(name, JSON.stringify(storedData));
 }
 
-function createStatistics(data) {
+function createStatistics() {
   const stat = {
     clicked: 0,
     state: false,
     correct: 0,
-    false: 0,
+    wrong: 0,
   };
 
-  const keys = Object.keys(data);
-  for (let i = 0; i < keys.length; i += 1) {
-    for (let j = 0; j < keys[i].length; j += 1) {
-      localStorage.setItem(data[keys[i]][j].name, JSON.stringify(stat));
-    }
-  }
+  data.getAllCardNames().forEach((item) => {
+    localStorage.setItem(item.name, JSON.stringify(stat));
+  });
 }
 
+const getStatistics = (storedData) => JSON.parse(localStorage.getItem(storedData));
 module.exports = {
-  setSwitch, getSwitch, changeStatistics, createStatistics,
+  setSwitch, getSwitch, changeStatistics, createStatistics, getStatistics,
 };

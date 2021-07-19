@@ -40,4 +40,10 @@ function changeInnerText(id, text) {
   document.getElementById(id).innerHTML = text;
 }
 
-module.exports = { append, create, changeInnerText };
+function clearHtml(id) {
+  document.getElementById(id).innerHTML = '';
+}
+
+module.exports = {
+  append, create, changeInnerText, clearHtml,
+};

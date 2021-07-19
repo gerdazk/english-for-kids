@@ -4,15 +4,18 @@ const data = require('./data');
 const StartButton = require('./StartButton');
 const LocalStorage = require('./LocalStorage');
 const Menu = require('./Menu');
+const HtmlHelper = require('./HtmlHelper');
+
+const onMenuItemClick = (e) => {
+  console.log('paspaustas menu itemas: ', e);
+  HtmlHelper.clearHtml('main');
+  Category.create(document.getElementById('main'), data.cards[e.target.innerHTML]);
+};
 
 window.addEventListener('DOMContentLoaded', () => {
   StartButton.create();
   Switch.create();
-  const keys = Object.keys(data.cards);
-  for (let i = 0; i < keys.length; i += 1) {
-    Category.create(8, document.getElementById('cards'), data.cards[keys[i]]);
-  }
   LocalStorage.createStatistics(data.cards);
-  Menu.create();
-  Menu.createButtons();
+  Menu.create(onMenuItemClick);
+  Category.createList(onMenuItemClick);
 });
