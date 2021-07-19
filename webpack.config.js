@@ -25,4 +25,12 @@ module.exports = {
     compress: true,
     port: 9001,
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
 };

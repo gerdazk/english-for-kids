@@ -3,11 +3,7 @@ const HtmlHelper = require('./HtmlHelper');
 const data = require('./data');
 
 function create(parent, item) {
-  const keys = Object.keys(item);
-  for (let j = 0; j < keys.length; j += 1) {
-    Card.create(parent, item[keys[j]]);
-  }
-  return document.getElementById('main');
+  item.map((card) => Card.create(parent, card));
 }
 
 const createList = (onMenuClick) => {
@@ -19,6 +15,7 @@ const createList = (onMenuClick) => {
         text: item,
         name: 'button',
         handleClick: onMenuClick,
+        data: { name: item },
       }),
     );
     return document.getElementById('main');

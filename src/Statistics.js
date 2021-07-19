@@ -3,6 +3,7 @@ const HtmlHelper = require('./HtmlHelper');
 const data = require('./data');
 
 const create = () => {
+  console.log('labas');
   data.getAllCards().forEach((item) => {
     const stat = LocalStorage.getStatistics(item.name);
     if (stat) {
@@ -58,6 +59,7 @@ const create = () => {
     }
     return document.getElementById('main');
   });
+  document.getElementById('reset').style.display = 'inline-block';
 };
 
 module.exports = { create };

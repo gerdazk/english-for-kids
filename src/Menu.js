@@ -17,7 +17,8 @@ const handleClick = () => {
 };
 
 const onStatisticsClick = () => {
-  Statistics.create(data);
+  HtmlHelper.clearHtml('main');
+  Statistics.create();
 };
 
 const createButtons = (onMenuClick) => {
@@ -25,7 +26,7 @@ const createButtons = (onMenuClick) => {
     HtmlHelper.append(
       document.getElementById('menuContainer'),
       HtmlHelper.create({
-        text: category, id: `menu${category}`, name: 'button', handleClick: onMenuClick,
+        text: category, id: `menu${category}`, name: 'button', handleClick: onMenuClick, data: { name: category },
       }),
     );
   });

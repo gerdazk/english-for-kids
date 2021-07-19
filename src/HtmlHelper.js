@@ -24,6 +24,7 @@ function create({
   if (handleClick) {
     element.addEventListener('click', handleClick);
   }
+
   if (handleMouseLeave) {
     element.addEventListener('mouseleave', handleMouseLeave);
   }

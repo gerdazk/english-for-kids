@@ -32,11 +32,15 @@ function createStatistics() {
   };
 
   data.getAllCardNames().forEach((item) => {
-    localStorage.setItem(item.name, JSON.stringify(stat));
+    localStorage.setItem(item, JSON.stringify(stat));
   });
 }
 
 const getStatistics = (storedData) => JSON.parse(localStorage.getItem(storedData));
+
+const changeCurrentPage = (item) => {
+  localStorage.setItem('currentPage', item);
+};
 module.exports = {
-  setSwitch, getSwitch, changeStatistics, createStatistics, getStatistics,
+  setSwitch, getSwitch, changeStatistics, createStatistics, getStatistics, changeCurrentPage,
 };
