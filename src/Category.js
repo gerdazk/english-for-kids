@@ -22,4 +22,15 @@ const createList = (onMenuClick) => {
   });
 };
 
-module.exports = { create, createList };
+const showResults = () => {
+  HtmlHelper.clearHtml('main');
+  HtmlHelper.append(
+    document.getElementById('main'),
+    HtmlHelper.create({
+      name: 'div',
+      text: `Total errors: ${localStorage.getItem('totalErrors')}`,
+    }),
+  );
+};
+
+module.exports = { create, createList, showResults };

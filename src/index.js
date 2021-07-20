@@ -12,11 +12,12 @@ const Reset = require('./Reset');
 const onMenuItemClick = (e) => {
   HtmlHelper.clearHtml('main');
   const clickedData = JSON.parse(e.target.getAttribute('data')).name;
+  console.log('clickeddata', clickedData);
   Category.create(document.getElementById('main'), data.cards[clickedData]);
   if (!document.getElementById('switch')) {
     Switch.create();
   }
-  localStorage.setItem('currentPage', data.cards[clickedData]);
+  localStorage.setItem('currentPage', clickedData);
 };
 
 window.addEventListener('DOMContentLoaded', () => {

@@ -372,6 +372,12 @@ const getAllCardNames = () => {
   return res;
 };
 
+const getCardsByCategory = (category) => cards[category];
+
 module.exports = {
-  cards, getAllCards, getAllCategories, getAllCardNames,
+  cards,
+  getAllCards,
+  getAllCategories,
+  getAllCardNames,
+  getCardsByCategory,
 };

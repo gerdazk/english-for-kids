@@ -10,8 +10,8 @@ function getSwitch(key) {
 
 function changeStatistics(name, key) {
   const storedData = JSON.parse(localStorage.getItem(name));
-  if (key === 'clicked') {
-    storedData.clicked += 1;
+  if (key === 'clicked' || key === 'correct' || key === 'wrong') {
+    storedData[key] += 1;
   }
   if (key === 'state') {
     if (storedData.state) {
@@ -41,6 +41,27 @@ const getStatistics = (storedData) => JSON.parse(localStorage.getItem(storedData
 const changeCurrentPage = (item) => {
   localStorage.setItem('currentPage', item);
 };
+
+const changeRandomCard = (item) => {
+  localStorage.setItem('randomCard', item);
+};
+
+const setTotalErrors = () => {
+  const errors = localStorage.getItem('totalErrrors');
+  if (errors) {
+    localStorage.setItem('totalErrors', errors + 1);
+  } else {
+    localStorage.setItem('totalErrors', 1);
+  }
+};
+
 module.exports = {
-  setSwitch, getSwitch, changeStatistics, createStatistics, getStatistics, changeCurrentPage,
+  setSwitch,
+  getSwitch,
+  changeStatistics,
+  createStatistics,
+  getStatistics,
+  changeCurrentPage,
+  changeRandomCard,
+  setTotalErrors,
 };
