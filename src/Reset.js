@@ -12,8 +12,7 @@ const create = () => {
   HtmlHelper.append(document.body, HtmlHelper.create({
     name: 'button', text: 'reset', id: 'reset', handleClick,
   }));
-  console.log('tuscia: ', Statistics);
-  document.getElementById('reset').style.display = 'none';
+  document.getElementById('reset').style.display = 'none'; // todo. html helperis tai daro ir su klasem
 };
 
 module.exports = { create };

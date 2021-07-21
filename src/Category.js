@@ -1,21 +1,23 @@
 const Card = require('./Card');
 const HtmlHelper = require('./HtmlHelper');
-const data = require('./data');
+const Words = require('./Words');
 
-function create(parent, item) {
-  item.map((card) => Card.create(parent, card));
+function createWords(parent, categoryName) {
+  const words = Words.getCardsByCategory(categoryName);
+  words.forEach((word) => Card.create(parent, word));
 }
 
 const createList = (onMenuClick) => {
-  const list = data.getAllCategories();
+  const list = Words.getAllCategories();
   list.map((item) => {
     HtmlHelper.append(
       document.getElementById('main'),
       HtmlHelper.create({
         text: item,
-        name: 'button',
+        name: 'div',
         handleClick: onMenuClick,
         data: { name: item },
+        className: 'card-container',
       }),
     );
     return document.getElementById('main');
@@ -33,4 +35,4 @@ const showResults = () => {
   );
 };
 
-module.exports = { create, createList, showResults };
+module.exports = { createWords, createList, showResults };

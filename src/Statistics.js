@@ -1,6 +1,6 @@
 const LocalStorage = require('./LocalStorage');
 const HtmlHelper = require('./HtmlHelper');
-const data = require('./data');
+const data = require('./Words');
 
 const create = () => {
   console.log('labas');

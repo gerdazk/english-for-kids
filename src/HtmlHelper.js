@@ -1,20 +1,29 @@
+function append(parent, child) {
+  return parent.appendChild(child);
+}
+
 function create({
-  name, text, type, id, handleClick, data, handleMouseLeave,
+  name,
+  text,
+  id,
+  handleClick,
+  data,
+  handleMouseLeave,
+  className,
+  attributes,
 }) {
   const element = document.createElement(name);
-  if (type) {
-    element.setAttribute('type', type);
+
+  if (attributes) {
+    attributes.forEach((attribute) => element.setAttribute(attribute.name, attribute.value));
+  }
+
+  if (data) { // todo, prideti visus data prie attributes
+    element.setAttribute('data', JSON.stringify(data));
   }
 
   if (text) {
     element.innerHTML = text;
-  }
-
-  if (data) {
-    if (data.name) {
-      element.innerHTML = data.name;
-    }
-    element.setAttribute('data', JSON.stringify(data));
   }
 
   if (id) {
@@ -29,12 +38,11 @@ function create({
     element.addEventListener('mouseleave', handleMouseLeave);
   }
 
-  return element;
-}
+  if (className) {
+    element.classList.add(className);
+  }
 
-function append(parent, child) {
-  parent.appendChild(child);
-  return parent;
+  return element;
 }
 
 function changeInnerText(id, text) {
@@ -46,5 +54,8 @@ function clearHtml(id) {
 }
 
 module.exports = {
-  append, create, changeInnerText, clearHtml,
+  append,
+  create,
+  changeInnerText,
+  clearHtml,
 };

@@ -1,6 +1,5 @@
 const LocalStorage = require('./LocalStorage');
 const Category = require('./Category');
-// const data = require('./data');
 
 function play(name) {
   const audio = new Audio(`./assets/audio/${name}.mp3`);
@@ -13,7 +12,7 @@ const playRandom = (collection) => {
     Category.showResults();
   }
   const item = filteredCollection[Math.floor(Math.random() * filteredCollection.length)].name;
-  const audio = new Audio(`./assets/audio/${item}.mp3`);
+  const audio = new Audio(`./assets/audio/${item}.mp3`); // todo perpanaudoti play metoda
   LocalStorage.changeRandomCard(item);
   return audio.play();
 };
@@ -21,10 +20,10 @@ const playRandom = (collection) => {
 const playEvaluated = (answer, disabled) => {
   if (disabled) return;
   if (answer) {
-    const correct = new Audio('./assets/audio/correct.mp3');
+    const correct = new Audio('./assets/audio/correct.mp3'); // todo perpanaudoti play metoda
     correct.play();
   } else {
-    const wrong = new Audio('./assets/audio/failure.mp3');
+    const wrong = new Audio('./assets/audio/failure.mp3'); // todo perpanaudoti play metoda
     wrong.play();
   }
 };

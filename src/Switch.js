@@ -18,11 +18,11 @@ function create() {
   LocalStorage.setSwitch('switch', 'train');
   const text = LocalStorage.getSwitch('switch');
   HtmlHelper.append(
-    document.body,
+    document.getElementById('nav'),
     HtmlHelper.create({
       name: 'button',
       text,
-      type: 'checkbox',
+      attributes: [{ name: 'type', value: 'checkbox' }],
       id: 'switch',
       handleClick,
     }),
