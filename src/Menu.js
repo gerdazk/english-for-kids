@@ -7,17 +7,14 @@ const handleClick = () => {
   const data = JSON.parse(menu.getAttribute('data'));
   if (data.open) {
     data.open = false;
-    document.getElementById('menuContainer').style.display = 'none';
+    HtmlHelper.toggleVisibility('menuContainer', true);
+    // document.getElementById('menuContainer').classList.add('hidden');
   } else {
     data.open = true;
-    document.getElementById('menuContainer').style.display = 'block';
+    HtmlHelper.toggleVisibility('menuContainer', false);
+    // document.getElementById('menuContainer').classList.remove('hidden');
   }
   menu.setAttribute('data', JSON.stringify(data));
-};
-
-const onStatisticsClick = () => {
-  HtmlHelper.clearHtml('main');
-  Statistics.create();
 };
 
 const close = () => {
@@ -25,7 +22,15 @@ const close = () => {
   const data = JSON.parse(menu.getAttribute('data'));
   data.open = false;
   menu.setAttribute('data', JSON.stringify(data));
-  document.getElementById('menuContainer').style.display = 'none';
+  HtmlHelper.toggleVisibility('menuContainer', true);
+  // document.getElementById('menuContainer').classList.add('hidden');
+};
+
+const onStatisticsClick = () => {
+  HtmlHelper.clearHtml('main');
+  Statistics.create();
+  localStorage.setItem('currentPage', 'statistics');
+  close();
 };
 
 const createButtons = (onMenuClick) => {
@@ -60,7 +65,8 @@ const create = (onMenuClick) => {
     document.getElementById('nav'),
     HtmlHelper.create({ id: 'menuContainer', name: 'div', className: 'menu-container' }),
   );
-  document.getElementById('menuContainer').style.display = 'none'; // naudok klases, ne stilius
+  HtmlHelper.toggleVisibility('menuContainer', true);
+  // document.getElementById('menuContainer').classList.add('hidden');
   createButtons(onMenuClick);
 };
 

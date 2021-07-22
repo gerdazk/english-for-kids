@@ -3,15 +3,17 @@ const HtmlHelper = require('./HtmlHelper');
 const data = require('./Words');
 
 const create = () => {
-  console.log('labas');
   data.getAllCards().forEach((item) => {
     const stat = LocalStorage.getStatistics(item.name);
+    // const parent = HtmlHelper.create({name: 'div', id:`${item.name}StatisticsContainer`})
     if (stat) {
+      // HtmlHelper.append(document.getElementById('main'), parent)
       HtmlHelper.append(
         document.getElementById('main'),
         HtmlHelper.create({
           id: `${item.name}main`,
           name: 'div',
+          className: 'statisticsContainer',
         }),
       );
       HtmlHelper.append(
@@ -62,4 +64,17 @@ const create = () => {
   document.getElementById('reset').style.display = 'inline-block';
 };
 
-module.exports = { create };
+const showResults = () => {
+  HtmlHelper.clearHtml('main');
+  HtmlHelper.append(
+    document.getElementById('main'),
+    HtmlHelper.create({
+      name: 'div',
+      text: `Total errors: ${localStorage.getItem('totalErrors')}`,
+    }),
+  );
+  // StartButton.toggleDisplay(false);
+  return document.getElementById('main');
+};
+
+module.exports = { create, showResults };

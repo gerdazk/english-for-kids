@@ -1,12 +1,17 @@
-const HtmlHelper = require('./HtmlHelper');
-const LocalStorage = require('./LocalStorage');
+const HtmlHelper = require('../HtmlHelper');
+const LocalStorage = require('../LocalStorage');
 const StartButton = require('./StartButton');
 
 const handleClick = () => {
   if (LocalStorage.getSwitch('switch') === 'train') {
     LocalStorage.setSwitch('switch', 'play');
     HtmlHelper.changeInnerText('switch', 'play');
-    StartButton.toggleDisplay(true);
+    const currentPage = localStorage.getItem('currentPage');
+    if (currentPage !== 'main' && currentPage !== 'statistics') {
+      StartButton.toggleDisplay(true);
+    } else {
+      StartButton.toggleDisplay(false);
+    }
   } else {
     LocalStorage.setSwitch('switch', 'train');
     HtmlHelper.changeInnerText('switch', 'train');

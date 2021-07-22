@@ -362,10 +362,7 @@ const getAllCards = () => {
   return result;
 };
 
-const getAllCategories = () => {
-  console.log(Object.keys(cards));
-  return Object.keys(cards);
-};
+const getAllCategories = () => Object.keys(cards);
 
 const getAllCardNames = () => {
   const res = getAllCards(cards).map((item) => item.name);

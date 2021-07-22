@@ -53,9 +53,18 @@ function clearHtml(id) {
   document.getElementById(id).innerHTML = '';
 }
 
+const toggleVisibility = (id, value) => {
+  if (value) {
+    document.getElementById(id).classList.add('hidden');
+  } else {
+    document.getElementById(id).classList.remove('hidden');
+  }
+};
+
 module.exports = {
   append,
   create,
   changeInnerText,
   clearHtml,
+  toggleVisibility,
 };

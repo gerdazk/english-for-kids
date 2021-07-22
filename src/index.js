@@ -1,13 +1,13 @@
 require('./styles.css');
 
 const Category = require('./Category');
-const Switch = require('./Switch');
+const Switch = require('./buttons/Switch');
 const Words = require('./Words');
-const StartButton = require('./StartButton');
+const StartButton = require('./buttons/StartButton');
 const LocalStorage = require('./LocalStorage');
 const Menu = require('./Menu');
 const HtmlHelper = require('./HtmlHelper');
-const Reset = require('./Reset');
+const Reset = require('./buttons/Reset');
 
 const onCategoryClick = (e) => {
   HtmlHelper.clearHtml('main');
@@ -22,6 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
   LocalStorage.createStatistics(Words.cards);
   Menu.create(onCategoryClick);
   Category.createList(onCategoryClick);
+  localStorage.setItem('currentPage', 'main');
   Reset.create();
   Switch.create();
 });

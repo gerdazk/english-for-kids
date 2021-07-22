@@ -1,6 +1,6 @@
-const HtmlHelper = require('./HtmlHelper');
-const LocalStorage = require('./LocalStorage');
-const Statistics = require('./Statistics');
+const HtmlHelper = require('../HtmlHelper');
+const LocalStorage = require('../LocalStorage');
+const Statistics = require('../Statistics');
 
 const handleClick = () => {
   LocalStorage.createStatistics();

@@ -1,5 +1,6 @@
 const LocalStorage = require('./LocalStorage');
-const Category = require('./Category');
+// const Category = require('./Category');
+const Statistics = require('./Statistics');
 
 function play(name) {
   const audio = new Audio(`./assets/audio/${name}.mp3`);
@@ -9,7 +10,7 @@ function play(name) {
 const playRandom = (collection) => {
   const filteredCollection = collection.filter((item) => JSON.parse(document.getElementById(item.name).getAttribute('data')).disabled !== true);
   if (!filteredCollection.length) {
-    Category.showResults();
+    Statistics.showResults();
   }
   const item = filteredCollection[Math.floor(Math.random() * filteredCollection.length)].name;
   const audio = new Audio(`./assets/audio/${item}.mp3`); // todo perpanaudoti play metoda
