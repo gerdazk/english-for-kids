@@ -101,6 +101,8 @@ body {
 
 .card-container img {
   width: 100%;
+  height: 166px;
+  object-fit: cover;
 }
 
 .card {
@@ -137,6 +139,7 @@ body {
   box-shadow: inset 220px 0 0 0.09px #e7f4ff;
 }
 
+
 #start {
   align-self: center;
   padding: 10px 30px;
@@ -156,10 +159,21 @@ body {
   flex: 1;
 }
 
-.menu-icon {
+.menu-icon, .close-icon {
   height: 40px;
+}
+
+.close-icon {
+  transition: transform .7s ease-in-out;
+}
+.close-icon:hover {
+  transform: rotate(360deg);
 }
 
 .menu-burger {
   cursor: pointer;
+}
+
+.active {
+  background-color: #dbefff;
 }

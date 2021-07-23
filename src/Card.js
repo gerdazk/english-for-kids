@@ -8,7 +8,7 @@ const evaluateClick = (item) => localStorage.getItem('randomCard') === item;
 const handleMouseLeave = (e) => {
   const dataAttr = JSON.parse(e.currentTarget.getAttribute('data'));
   if (document.getElementById(dataAttr.name).innerHTML === dataAttr.nameLT) { // todo
-    setTimeout(() => HtmlHelper.changeInnerText(dataAttr.name, dataAttr.name), 500);
+    setTimeout(() => HtmlHelper.changeInnerText(dataAttr.name, dataAttr.name), 200);
   }
 };
 

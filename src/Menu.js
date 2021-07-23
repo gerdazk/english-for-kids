@@ -1,7 +1,15 @@
 const Words = require('./Words');
 const HtmlHelper = require('./HtmlHelper');
-const Statistics = require('./Statistics');
+// const Statistics = require('./Statistics');
 const Category = require('./Category');
+
+const changeActiveElement = (elem) => {
+  const active = document.getElementsByClassName('active');
+  while (active[0]) {
+    active[0].classList.remove('active');
+  }
+  document.getElementById(elem).classList.add('active');
+};
 
 const handleClick = () => {
   const menu = document.getElementById('menuIcon');
@@ -24,12 +32,13 @@ const close = () => {
   HtmlHelper.toggleVisibility('menuContainer', true);
 };
 
-const onStatisticsClick = () => {
-  HtmlHelper.clearHtml('main');
-  Statistics.create();
-  localStorage.setItem('currentPage', 'statistics');
-  close();
-};
+// const onStatisticsClick = () => {
+//   HtmlHelper.clearHtml('main');
+//   Statistics.create();
+//   localStorage.setItem('currentPage', 'statistics');
+//   changeActiveElement('menuStatistics');
+//   close();
+// };
 
 const createButtons = (onMenuClick) => {
   const container = document.getElementById('menuContainer');
@@ -38,16 +47,22 @@ const createButtons = (onMenuClick) => {
     text: 'statistics',
     id: 'menuStatistics',
     name: 'div',
-    handleClick: onStatisticsClick,
+    data: { name: 'statistics' },
+    handleClick: onMenuClick,
     className: 'menu-button',
   });
 
   const closeButton = HtmlHelper.create({
-    text: 'close',
     id: 'close',
     name: 'div',
     handleClick: close,
     className: 'menu-button',
+  });
+
+  const closeIcon = HtmlHelper.create({
+    name: 'img',
+    attributes: [{ name: 'src', value: './assets/img/close.png' }],
+    className: 'close-icon',
   });
 
   const main = HtmlHelper.create({
@@ -58,13 +73,14 @@ const createButtons = (onMenuClick) => {
     handleClick: () => {
       HtmlHelper.clearHtml('main');
       Category.createList(onMenuClick);
+      changeActiveElement('menuMain');
       close();
     },
   });
-
+  HtmlHelper.append(closeButton, closeIcon);
+  HtmlHelper.append(container, closeButton);
   HtmlHelper.append(container, main);
   HtmlHelper.append(container, statistics);
-  HtmlHelper.append(container, closeButton);
 
   Words.getAllCategories().forEach((category) => {
     HtmlHelper.append(
@@ -108,4 +124,6 @@ const create = (onMenuClick) => {
   createButtons(onMenuClick);
 };
 
-module.exports = { create, createButtons, close };
+module.exports = {
+  create, createButtons, close, changeActiveElement,
+};

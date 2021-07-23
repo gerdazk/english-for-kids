@@ -8,12 +8,20 @@ const LocalStorage = require('./LocalStorage');
 const Menu = require('./Menu');
 const HtmlHelper = require('./HtmlHelper');
 const Reset = require('./buttons/Reset');
+const Statistics = require('./Statistics');
 
 const onCategoryClick = (e) => {
   HtmlHelper.clearHtml('main');
-  const { name } = JSON.parse(e.target.getAttribute('data'));
-  // setTimeout(() => { Category.createWords(document.getElementById('main'), name); }, 100);
-  Category.createWords(document.getElementById('main'), name);
+  const { name } = JSON.parse(e.currentTarget.getAttribute('data'));
+  if (name === 'statistics') {
+    Statistics.create();
+    localStorage.setItem('currentPage', 'statistics');
+    Menu.changeActiveElement('menuStatistics');
+    Menu.close();
+  } else {
+    Menu.changeActiveElement(`menu${name}`);
+    Category.createWords(document.getElementById('main'), name);
+  }
   localStorage.setItem('currentPage', name);
   Menu.close();
 };
