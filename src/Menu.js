@@ -1,6 +1,7 @@
 const Words = require('./Words');
 const HtmlHelper = require('./HtmlHelper');
 const Statistics = require('./Statistics');
+const Category = require('./Category');
 
 const handleClick = () => {
   const menu = document.getElementById('menuIcon');
@@ -31,9 +32,43 @@ const onStatisticsClick = () => {
 };
 
 const createButtons = (onMenuClick) => {
+  const container = document.getElementById('menuContainer');
+
+  const statistics = HtmlHelper.create({
+    text: 'statistics',
+    id: 'menuStatistics',
+    name: 'div',
+    handleClick: onStatisticsClick,
+    className: 'menu-button',
+  });
+
+  const closeButton = HtmlHelper.create({
+    text: 'close',
+    id: 'close',
+    name: 'div',
+    handleClick: close,
+    className: 'menu-button',
+  });
+
+  const main = HtmlHelper.create({
+    text: 'main',
+    id: 'menuMain',
+    name: 'div',
+    className: 'menu-button',
+    handleClick: () => {
+      HtmlHelper.clearHtml('main');
+      Category.createList(onMenuClick);
+      close();
+    },
+  });
+
+  HtmlHelper.append(container, main);
+  HtmlHelper.append(container, statistics);
+  HtmlHelper.append(container, closeButton);
+
   Words.getAllCategories().forEach((category) => {
     HtmlHelper.append(
-      document.getElementById('menuContainer'),
+      container,
       HtmlHelper.create({
         text: category,
         id: `menu${category}`,
@@ -44,16 +79,6 @@ const createButtons = (onMenuClick) => {
       }),
     );
   });
-  HtmlHelper.append(
-    document.getElementById('menuContainer'),
-    HtmlHelper.create({
-      text: 'statistics',
-      id: 'menuStatistics',
-      name: 'div',
-      handleClick: onStatisticsClick,
-      className: 'menu-button',
-    }),
-  );
 };
 
 const create = (onMenuClick) => {

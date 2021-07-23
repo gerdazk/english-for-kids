@@ -110,24 +110,31 @@ body {
 .menu-container {
   position: absolute;
   top: 0;
-  left: 0;
+  left: -14em;
   background-color: #f2f9ff;
   height: 100%;
   margin: 0;
+  transition: left 0.5s ease-in-out;
+  list-style-type: none;
+  padding: 0;
+}
+
+.show {
+  left: 0em;
 }
 
 .menu-button {
   font-size: 16px;
   text-transform: uppercase;
-  padding: 1.5rem 3rem;
+  padding: 1.5rem 4rem;
   font-weight: 600;
   color: #ffaee9;
-  transition: all 0.5s ease-in-out
+  cursor: pointer;
+  transition: ease-out 0.6s;
 }
 
 .menu-button:hover {
-  background-color: #e7f4ff;
-  cursor: pointer;
+  box-shadow: inset 220px 0 0 0.09px #e7f4ff;
 }
 
 #start {
@@ -149,10 +156,6 @@ body {
   flex: 1;
 }
 
-.hidden {
-  display: none;
-}
-
 .menu-icon {
   height: 40px;
 }
@@ -160,74 +163,3 @@ body {
 .menu-burger {
   cursor: pointer;
 }
-
-/* .menu-button {
-  color: #9c27b0;
-  font-weight: bold;
-  flex: 0 1 200px;
-  padding: 70px 40px;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 20px;
-  border: 1px solid #efe4ff;
-  border-radius: 30px;
-  margin: 20px;
-  background-color: #edefff;
-  transition: all 0.5s ease-out;
-} */
-
-/* .menu-button:hover {
-  cursor: pointer;
-  background-color: #fff1fc;
-}
-
-.menu-container {
-  display: flex !important;
-  flex-wrap: wrap; */
-/* align-items: center; */
-/* justify-content: center;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; */
-/* align-items: center;
-  text-align: center;
-  flex-wrap: wrap;
-  margin: 20px;
-  font-weight: bold;
-  font-size: 20px;
-  color: #f6a6ff;
-  text-align: center; */
-/* text-transform: uppercase;
-  font-size: 20px;
-  border: 1px solid #efe4ff;
-  border-radius: 30px;
-  background-color: #edefff;
-  transition: all 0.5s ease-out;
-  padding: 20px;
-} */
-
-/* .card:hover {
-    cursor: pointer;
-    background-color: #fff1fc;
-    font-size: 22px;
-  }
-
-.card img {
-  width: 250px;
-  object-fit: cover;
-  border-radius: 10%;
-  padding-top: 30px;
-} */
-/* 
-.card > * {
-  flex: 0 1 250px;
-}
-
-#main {
-    display: flex;
-    flex-wrap: wrap;
-    font-family: sans-serif;
-} */

@@ -7,7 +7,7 @@ function createWords(parent, categoryName) {
   words.forEach((word) => Card.create(parent, word));
 }
 
-const createList = (onMenuClick) => {
+const createList = (onCategoryClick) => {
   const list = Words.getAllCategories();
   list.map((item) => {
     HtmlHelper.append(
@@ -15,7 +15,7 @@ const createList = (onMenuClick) => {
       HtmlHelper.create({
         text: item,
         name: 'div',
-        handleClick: onMenuClick,
+        handleClick: onCategoryClick,
         data: { name: item },
         className: 'card-container',
       }),

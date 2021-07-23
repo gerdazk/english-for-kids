@@ -12,6 +12,7 @@ const Reset = require('./buttons/Reset');
 const onCategoryClick = (e) => {
   HtmlHelper.clearHtml('main');
   const { name } = JSON.parse(e.target.getAttribute('data'));
+  // setTimeout(() => { Category.createWords(document.getElementById('main'), name); }, 100);
   Category.createWords(document.getElementById('main'), name);
   localStorage.setItem('currentPage', name);
   Menu.close();
