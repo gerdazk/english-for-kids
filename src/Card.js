@@ -5,20 +5,29 @@ const data = require('./Words');
 
 const evaluateClick = (item) => localStorage.getItem('randomCard') === item;
 
+const handleMouseLeave = (e) => {
+  const dataAttr = JSON.parse(e.currentTarget.getAttribute('data'));
+  if (document.getElementById(dataAttr.name).innerHTML === dataAttr.nameLT) { // todo
+    setTimeout(() => HtmlHelper.changeInnerText(dataAttr.name, dataAttr.name), 500);
+  }
+};
+
 const handleClick = (e) => {
-  const dataAttr = JSON.parse(e.target.getAttribute('data'));
+  const dataAttr = JSON.parse(e.currentTarget.getAttribute('data'));
   if (LocalStorage.getSwitch('switch') === 'train') {
+    localStorage.setItem('activeGame', false);
     SoundPlayer.play(dataAttr.name);
-    HtmlHelper.changeInnerText(e.target.id, dataAttr.nameLT);
+    HtmlHelper.changeInnerText(dataAttr.name, dataAttr.nameLT);
     LocalStorage.changeStatistics(dataAttr.name, 'clicked');
   } else {
+    if (!localStorage.getItem('activeGame')) return;
     const evaluatedAnswer = evaluateClick(dataAttr.name);
     SoundPlayer.playEvaluated(evaluatedAnswer, dataAttr.disabled);
     if (evaluatedAnswer) {
       LocalStorage.changeStatistics(dataAttr.name, 'correct');
       dataAttr.disabled = true; // todo
-      e.target.style.color = 'black'; // todo
-      e.target.setAttribute('data', JSON.stringify(dataAttr)); // todo
+      e.currentTarget.opacity = 0.5; // todo
+      e.currentTarget.setAttribute('data', JSON.stringify(dataAttr)); // todo
       SoundPlayer.playRandom(data.cards[localStorage.getItem('currentPage')]);
     } else if (dataAttr.disabled !== true) {
       LocalStorage.changeStatistics(
@@ -30,18 +39,14 @@ const handleClick = (e) => {
   }
 };
 
-const handleMouseLeave = (e) => {
-  const dataAttr = JSON.parse(e.target.getAttribute('data'));
-  if (e.target.innerHTML === dataAttr.nameLT) {
-    HtmlHelper.changeInnerText(e.target.id, dataAttr.name);
-  }
-};
-
 const create = (parentElement, categoryData) => {
   const parent = HtmlHelper.create({
     name: 'div',
+    data: categoryData,
     id: `${categoryData.name}Container`,
     className: 'card-container',
+    handleClick,
+    handleMouseLeave,
   });
 
   const image = HtmlHelper.create({
@@ -50,20 +55,28 @@ const create = (parentElement, categoryData) => {
     id: `${categoryData.name}Image`,
   });
 
-  const card = HtmlHelper.create({
+  const cardPlay = HtmlHelper.create({
     name: 'div',
-    handleClick,
+    id: categoryData.name,
+    image,
+    className: 'card',
+  });
+
+  const cardTrain = HtmlHelper.create({
+    name: 'div',
     id: categoryData.name,
     text: categoryData.name,
-    data: categoryData,
-    handleMouseLeave,
     image,
     className: 'card',
   });
 
   HtmlHelper.append(parentElement, parent);
   HtmlHelper.append(parent, image);
-  HtmlHelper.append(parent, card);
+  if (LocalStorage.getSwitch() === 'play') {
+    HtmlHelper.append(parent, cardPlay);
+  } else {
+    HtmlHelper.append(parent, cardTrain);
+  }
 };
 
 module.exports = { create };

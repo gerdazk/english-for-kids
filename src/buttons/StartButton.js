@@ -1,8 +1,13 @@
 const HtmlHelper = require('../HtmlHelper');
+const LocalStorage = require('../LocalStorage');
 const SoundPlayer = require('../SoundPlayer');
 const data = require('../Words');
 
 const handleClick = () => {
+  LocalStorage.changeRandomCard(null);
+  localStorage.setItem('activeGame', true);
+  localStorage.setItem('totalErrors', 0);
+  // nuimti disabled nuo visu
   SoundPlayer.playRandom(data.cards[localStorage.getItem('currentPage')]);
 };
 

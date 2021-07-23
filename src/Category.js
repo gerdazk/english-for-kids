@@ -24,16 +24,4 @@ const createList = (onMenuClick) => {
   });
 };
 
-// const showResults = () => {
-//   HtmlHelper.clearHtml('main');
-//   HtmlHelper.append(
-//     document.getElementById('main'),
-//     HtmlHelper.create({
-//       name: 'div',
-//       text: `Total errors: ${localStorage.getItem('totalErrors')}`,
-//     }),
-//   );
-//   return document.getElementById('main');
-// };
-
 module.exports = { createWords, createList };

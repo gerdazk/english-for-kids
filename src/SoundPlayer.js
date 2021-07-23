@@ -1,5 +1,4 @@
 const LocalStorage = require('./LocalStorage');
-// const Category = require('./Category');
 const Statistics = require('./Statistics');
 
 function play(name) {
@@ -8,11 +7,17 @@ function play(name) {
 }
 
 const playRandom = (collection) => {
-  const filteredCollection = collection.filter((item) => JSON.parse(document.getElementById(item.name).getAttribute('data')).disabled !== true);
+  const filteredCollection = collection.filter(
+    (item) => JSON.parse(
+      document.getElementById(`${item.name}Container`).getAttribute('data'),
+    ).disabled !== true,
+  );
   if (!filteredCollection.length) {
+    localStorage.setItem('activeGame', false);
     Statistics.showResults();
   }
-  const item = filteredCollection[Math.floor(Math.random() * filteredCollection.length)].name;
+  const item = filteredCollection[Math.floor(Math.random() * filteredCollection.length)]
+    .name;
   const audio = new Audio(`./assets/audio/${item}.mp3`); // todo perpanaudoti play metoda
   LocalStorage.changeRandomCard(item);
   return audio.play();

@@ -4,8 +4,8 @@ function setSwitch(key, value) {
   return localStorage.setItem(key, value);
 }
 
-function getSwitch(key) {
-  return localStorage.getItem(key);
+function getSwitch() {
+  return localStorage.getItem('switch');
 }
 
 // todo. vienas state pakeitimui, kitas clicked logikai
