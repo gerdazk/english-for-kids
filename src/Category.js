@@ -33,6 +33,7 @@ const createList = (onCategoryClick) => {
   let element;
   let parent;
   let image;
+
   list.forEach((item) => {
     element = HtmlHelper.create({
       text: item,

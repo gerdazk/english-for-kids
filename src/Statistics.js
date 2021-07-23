@@ -1,6 +1,7 @@
 const LocalStorage = require('./LocalStorage');
 const HtmlHelper = require('./HtmlHelper');
 const data = require('./Words');
+const StartButton = require('./buttons/StartButton');
 
 const create = () => {
   data.getAllCards().forEach((item) => {
@@ -61,7 +62,8 @@ const create = () => {
     }
     return document.getElementById('main');
   });
-  document.getElementById('reset').style.display = 'inline-block';
+  HtmlHelper.toggleVisibility('reset', false);
+  // document.getElementById('reset').style.display = 'inline-block';
 };
 
 const showResults = () => {
@@ -73,7 +75,7 @@ const showResults = () => {
       text: `Total errors: ${localStorage.getItem('totalErrors')}`,
     }),
   );
-  // StartButton.toggleDisplay(false);
+  StartButton.toggleDisplay(false);
   return document.getElementById('main');
 };
 

@@ -95,10 +95,6 @@ body {
   transition: all 0.5s ease-in-out;
 }
 
-.card-container:hover {
-  flex: 0 1 255px;
-}
-
 .card-container img {
   width: 100%;
   height: 166px;
@@ -123,6 +119,10 @@ body {
 
 .show {
   left: 0em;
+}
+
+.hidden {
+  display: none;
 }
 
 .menu-button {
@@ -176,4 +176,9 @@ body {
 
 .active {
   background-color: #dbefff;
+}
+
+.rotate-image {
+  width: 30px !important;
+  height: 30px !important;
 }

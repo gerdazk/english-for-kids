@@ -1,35 +1,37 @@
 const HtmlHelper = require('./HtmlHelper');
 const SoundPlayer = require('./SoundPlayer');
 const LocalStorage = require('./LocalStorage');
-const data = require('./Words');
+const Words = require('./Words');
+const Rotate = require('./Rotate');
 
 const evaluateClick = (item) => localStorage.getItem('randomCard') === item;
 
 const handleMouseLeave = (e) => {
-  const dataAttr = JSON.parse(e.currentTarget.getAttribute('data'));
-  if (document.getElementById(dataAttr.name).innerHTML === dataAttr.nameLT) { // todo
-    setTimeout(() => HtmlHelper.changeInnerText(dataAttr.name, dataAttr.name), 200);
+  const data = JSON.parse(e.currentTarget.getAttribute('data'));
+  if (document.getElementById(data.name).innerHTML === data.nameLT) { // todo
+    setTimeout(() => HtmlHelper.changeInnerText(data.name, data.name), 200);
   }
 };
 
 const handleClick = (e) => {
-  const dataAttr = JSON.parse(e.currentTarget.getAttribute('data'));
+  const data = JSON.parse(e.currentTarget.getAttribute('data'));
+  console.log(e.currentTarget, e.target);
+  if (e.target.id === 'rotate' || e.target.id === 'rotate-image') return;
   if (LocalStorage.getSwitch('switch') === 'train') {
     localStorage.setItem('activeGame', false);
-    SoundPlayer.play(dataAttr.name);
-    HtmlHelper.changeInnerText(dataAttr.name, dataAttr.nameLT);
-    LocalStorage.changeStatistics(dataAttr.name, 'clicked');
+    SoundPlayer.play(data.name);
+    LocalStorage.changeStatistics(data.name, 'clicked');
   } else {
     if (!localStorage.getItem('activeGame')) return;
-    const evaluatedAnswer = evaluateClick(dataAttr.name);
-    SoundPlayer.playEvaluated(evaluatedAnswer, dataAttr.disabled);
+    const evaluatedAnswer = evaluateClick(data.name);
+    SoundPlayer.playEvaluated(evaluatedAnswer, data.disabled);
     if (evaluatedAnswer) {
-      LocalStorage.changeStatistics(dataAttr.name, 'correct');
-      dataAttr.disabled = true; // todo
+      LocalStorage.changeStatistics(data.name, 'correct');
+      data.disabled = true; // todo
       e.currentTarget.opacity = 0.5; // todo
-      e.currentTarget.setAttribute('data', JSON.stringify(dataAttr)); // todo
-      SoundPlayer.playRandom(data.cards[localStorage.getItem('currentPage')]);
-    } else if (dataAttr.disabled !== true) {
+      e.currentTarget.setAttribute('data', JSON.stringify(data)); // todo
+      SoundPlayer.playRandom(Words.cards[localStorage.getItem('currentPage')]);
+    } else if (data.disabled !== true) {
       LocalStorage.changeStatistics(
         localStorage.getItem('randomCard'),
         'wrong',
@@ -76,6 +78,7 @@ const create = (parentElement, categoryData) => {
     HtmlHelper.append(parent, cardPlay);
   } else {
     HtmlHelper.append(parent, cardTrain);
+    Rotate.create(parent, categoryData);
   }
 };
 

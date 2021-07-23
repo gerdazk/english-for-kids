@@ -56,8 +56,10 @@ function clearHtml(id) {
 const toggleVisibility = (id, value) => {
   if (value) {
     document.getElementById(id).classList.remove('show');
+    document.getElementById(id).classList.add('hidden');
   } else {
     document.getElementById(id).classList.add('show');
+    document.getElementById(id).classList.remove('hidden');
   }
 };
 

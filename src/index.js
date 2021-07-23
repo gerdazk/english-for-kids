@@ -12,6 +12,7 @@ const Statistics = require('./Statistics');
 
 const onCategoryClick = (e) => {
   HtmlHelper.clearHtml('main');
+  HtmlHelper.toggleVisibility('reset', true);
   const { name } = JSON.parse(e.currentTarget.getAttribute('data'));
   if (name === 'statistics') {
     Statistics.create();

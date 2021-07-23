@@ -9,10 +9,18 @@ const handleClick = () => {
 };
 
 const create = () => {
-  HtmlHelper.append(document.body, HtmlHelper.create({
-    name: 'button', text: 'reset', id: 'reset', handleClick,
-  }));
-  document.getElementById('reset').style.display = 'none'; // todo. html helperis tai daro ir su klasem
+  HtmlHelper.append(
+    document.body,
+    HtmlHelper.create({
+      name: 'button',
+      text: 'reset',
+      id: 'reset',
+      handleClick,
+    }),
+  );
+  HtmlHelper.toggleVisibility('reset', true);
+  // document.getElementById('reset').style.display = 'none';
+  // todo. html helperis tai daro ir su klasem
 };
 
 module.exports = { create };
