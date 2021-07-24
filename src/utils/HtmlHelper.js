@@ -39,7 +39,14 @@ function create({
   }
 
   if (className) {
-    element.classList.add(className);
+    console.log(className);
+    if (typeof className !== 'string') {
+      className.forEach((item) => {
+        element.classList.add(item);
+      });
+    } else {
+      element.classList.add(className);
+    }
   }
 
   return element;

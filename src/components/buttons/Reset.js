@@ -9,6 +9,7 @@ const create = (handleClick) => {
       text: 'reset',
       id: 'reset',
       handleClick,
+      className: 'button-blue',
     }),
   );
   HtmlHelper.toggleVisibility('reset', true);

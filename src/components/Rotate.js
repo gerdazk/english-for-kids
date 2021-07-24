@@ -4,6 +4,8 @@ const handleClick = (e) => {
   const data = JSON.parse(e.target.parentElement.getAttribute('data'));
   localStorage.setItem('activeGame', false);
   HtmlHelper.changeInnerText(data.name, data.nameLT);
+  document.getElementById(`${data.name}Container`).classList.add('is-flipped');
+  document.getElementById(`${data.name}`).classList.add('is-flipped-child');
   LocalStorage.changeStatistics(data.name, 'clicked');
 };
 

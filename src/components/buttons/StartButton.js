@@ -31,7 +31,7 @@ const handleClick = () => {
 const create = () => {
   console.log(SoundPlayer);
   HtmlHelper.append(document.body, HtmlHelper.create({
-    name: 'button', text: 'start', id: 'start', handleClick,
+    name: 'button', text: 'start', id: 'start', handleClick, className: 'button-blue',
   }));
   HtmlHelper.toggleVisibility('start', true);
 };

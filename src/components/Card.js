@@ -12,8 +12,17 @@ const disable = (name) => {
 
 const handleMouseLeave = (e) => {
   const data = JSON.parse(e.currentTarget.getAttribute('data'));
-  if (document.getElementById(data.name).innerHTML === data.nameLT) { // todo
-    setTimeout(() => HtmlHelper.changeInnerText(data.name, data.name), 200);
+  if (document.getElementById(data.name).innerHTML === data.nameLT) {
+    // todo
+    setTimeout(() => {
+      document
+        .getElementById(`${data.name}Container`)
+        .classList.remove('is-flipped');
+      document
+        .getElementById(`${data.name}`)
+        .classList.remove('is-flipped-child');
+      HtmlHelper.changeInnerText(data.name, data.name);
+    }, 300);
   }
 };
 
@@ -33,7 +42,11 @@ const handleClick = (e) => {
       data.disabled = true; // todo
       disable(data.name);
       e.currentTarget.setAttribute('data', JSON.stringify(data)); // todo
-      setTimeout(() => { SoundPlayer.playRandom(Words.getData()[localStorage.getItem('currentPage')]); }, 1000);
+      setTimeout(() => {
+        SoundPlayer.playRandom(
+          Words.getData()[localStorage.getItem('currentPage')],
+        );
+      }, 1000);
     } else if (data.disabled !== true) {
       LocalStorage.changeStatistics(
         localStorage.getItem('randomCard'),
@@ -56,7 +69,9 @@ const create = (parentElement, categoryData) => {
 
   const image = HtmlHelper.create({
     name: 'img',
-    attributes: [{ name: 'src', value: `./assets/img/${categoryData.name}.jpg` }],
+    attributes: [
+      { name: 'src', value: `./assets/img/${categoryData.name}.jpg` },
+    ],
     id: `${categoryData.name}Image`,
   });
 
@@ -67,12 +82,20 @@ const create = (parentElement, categoryData) => {
     className: 'card',
   });
 
+  // const cardTrainBack = HtmlHelper.create({
+  //   name: 'div',
+  //   id: categoryData.nameLT,
+  //   text: categoryData.nameLT,
+  //   image,
+  //   className: ['card', 'card-back'],
+  // });
+
   const cardTrain = HtmlHelper.create({
     name: 'div',
     id: categoryData.name,
     text: categoryData.name,
     image,
-    className: 'card',
+    className: ['card', 'card-front'],
   });
 
   HtmlHelper.append(parentElement, parent);
@@ -81,6 +104,7 @@ const create = (parentElement, categoryData) => {
     HtmlHelper.append(parent, cardPlay);
   } else {
     HtmlHelper.append(parent, cardTrain);
+    // HtmlHelper.append(parent, cardTrainBack);
     Rotate.create(parent, categoryData);
   }
 };
