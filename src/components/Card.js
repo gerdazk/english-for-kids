@@ -6,6 +6,10 @@ const Rotate = require('./Rotate');
 
 const evaluateClick = (item) => localStorage.getItem('randomCard') === item;
 
+const disable = (name) => {
+  document.getElementById(`${name}Container`).classList.add('disabled');
+};
+
 const handleMouseLeave = (e) => {
   const data = JSON.parse(e.currentTarget.getAttribute('data'));
   if (document.getElementById(data.name).innerHTML === data.nameLT) { // todo
@@ -27,9 +31,9 @@ const handleClick = (e) => {
     if (evaluatedAnswer) {
       LocalStorage.changeStatistics(data.name, 'correct');
       data.disabled = true; // todo
-      e.currentTarget.opacity = 0.5; // todo
+      disable(data.name);
       e.currentTarget.setAttribute('data', JSON.stringify(data)); // todo
-      SoundPlayer.playRandom(Words.cards[localStorage.getItem('currentPage')]);
+      setTimeout(() => { SoundPlayer.playRandom(Words.getData()[localStorage.getItem('currentPage')]); }, 1000);
     } else if (data.disabled !== true) {
       LocalStorage.changeStatistics(
         localStorage.getItem('randomCard'),

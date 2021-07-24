@@ -211,3 +211,11 @@ body {
   width: 30px !important;
   height: 30px !important;
 }
+
+.disabled {
+  background-color: black;
+}
+
+.disabled img {
+  opacity: 0.5;
+}

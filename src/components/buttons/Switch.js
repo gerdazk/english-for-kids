@@ -1,29 +1,10 @@
-const { HtmlHelper, LocalStorage } = require('../../utils');
-const StartButton = require('./StartButton');
-const Category = require('../Category');
+const HtmlHelper = require('../../utils/HtmlHelper');
+const LocalStorage = require('../../utils/LocalStorage');
 
-const handleClick = () => {
-  if (LocalStorage.getSwitch() === 'train') {
-    LocalStorage.setSwitch('switch', 'play');
-    // HtmlHelper.changeInnerText('switch', 'play');
-    const currentPage = localStorage.getItem('currentPage');
-    if (currentPage !== 'main' && currentPage !== 'statistics') {
-      StartButton.toggleDisplay(true);
-    } else {
-      StartButton.toggleDisplay(false);
-    }
-  } else {
-    LocalStorage.setSwitch('switch', 'train');
-    StartButton.toggleDisplay(false);
-  }
-  HtmlHelper.clearHtml('main');
-  Category.create(document.getElementById('main'), localStorage.getItem('currentPage'));
-};
-
-function create() {
+function create(handleChange) {
   LocalStorage.setSwitch('switch', 'train');
   const button = document.getElementById('switch');
-  button.addEventListener('click', handleClick, false);
+  document.getElementById('checkbox').addEventListener('change', handleChange);
   HtmlHelper.append(document.getElementById('nav'), button);
   // const text = LocalStorage.getSwitch();
   // HtmlHelper.append(
