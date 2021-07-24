@@ -320,7 +320,7 @@ const cards = {
     },
     {
       name: 'skip',
-      nameLT: 'šokinėti šokdyne',
+      nameLT: 'šokinėti',
       media: 'skip',
       state: 'closed',
       category: 'action2',

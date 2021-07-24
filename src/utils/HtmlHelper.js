@@ -1,4 +1,5 @@
 function append(parent, child) {
+  console.log(parent, child);
   return parent.appendChild(child);
 }
 
@@ -39,7 +40,6 @@ function create({
   }
 
   if (className) {
-    console.log(className);
     if (typeof className !== 'string') {
       className.forEach((item) => {
         element.classList.add(item);

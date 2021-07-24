@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;700&display=swap");
 
 body {
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
 
 .switch {
@@ -81,7 +82,8 @@ input:checked + .slider .train {
 }
 
 .slider:before {
-  border-radius: 50%;}
+  border-radius: 50%;
+}
 
 body {
   display: flex;
@@ -114,7 +116,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: white;
-  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
   flex: 0 1 250px;
   margin: 20px;
   padding: 10px;
@@ -137,11 +139,11 @@ body {
 }
 
 .is-flipped {
-  transform:rotateY(-180deg);
+  transform: rotateY(-180deg);
 }
 
 .is-flipped-child {
-  transform:rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
 .card-container img {
@@ -193,20 +195,20 @@ body {
 
 .button-blue {
   align-self: center;
-    padding: 8px 52px;
-    font-size: 25px;
-    text-transform: uppercase;
-    cursor: pointer;
-    background-color: #67bcff;
-    color: white;
-    box-shadow: 1px 2px 10px #a4a4a4;
-    border: none;
-    border-radius: 23px;
-    font-family: 'POPPINS';
-    font-weight: 600;
-    letter-spacing: 0.1rem;
-    transition: all 0.5s ease;
-    margin-top: 30px;
+  padding: 8px 52px;
+  font-size: 25px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: #67bcff;
+  color: white;
+  box-shadow: 1px 2px 10px #a4a4a4;
+  border: none;
+  border-radius: 23px;
+  font-family: "POPPINS";
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  transition: all 0.5s ease;
+  margin-top: 30px;
 }
 
 .button-blue:hover {
@@ -222,6 +224,10 @@ body {
 .close-icon {
   height: 40px;
   opacity: 0.5;
+}
+
+.menu-icon:hover {
+  opacity: 1;
 }
 
 .close-icon {
@@ -254,4 +260,38 @@ body {
   opacity: 0.3 !important;
   color: #8f8f8f !important;
   background-color: white !important;
+}
+
+.row {
+  display: flex;
+  font-family: "Bitter";
+  font-weight: 500;
+  padding: 1rem;
+  background-color: #ffe3fa;
+  box-shadow: 1px 1px 9px #cecece;
+  margin: 0.7rem 0;
+  border-radius: 30px;
+  font-weight: 600;
+  color: #e577d1;
+}
+
+.title-row {
+  font-weight: 700;
+  background: linear-gradient(
+    90deg,
+    rgba(214, 237, 255, 1) 0%,
+    rgba(187, 225, 255, 1) 36%,
+    rgba(214, 237, 255, 1) 100%
+  );
+  color: #67bcff;
+  font-size: 1.2rem;
+  box-shadow: 1px 1px 9px #cecece;
+}
+
+.cell {
+  flex: 1;
+}
+
+.statistics-container {
+  width: 100%;
 }
