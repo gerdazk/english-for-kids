@@ -2,6 +2,8 @@ const Reset = require('./buttons/Reset');
 const Words = require('../utils/Words');
 const LocalStorage = require('../utils/LocalStorage');
 const HtmlHelper = require('../utils/HtmlHelper');
+const SoundPlayer = require('../utils/SoundPlayer');
+// const Router = require('./Router');
 
 const createColumns = () => {
   const container = HtmlHelper.create({
@@ -51,7 +53,7 @@ const createColumns = () => {
     className: 'cell',
   });
 
-  const main = document.getElementById('main');
+  const main = HtmlHelper.getElement('main');
   HtmlHelper.append(main, container);
   HtmlHelper.append(container, parent);
 
@@ -87,7 +89,7 @@ const calculateAnswers = (data) => {
 const create = () => {
   localStorage.setItem('currentPage', 'statistics');
   createColumns();
-  const container = document.getElementById('statisticsContainer');
+  const container = HtmlHelper.getElement('statisticsContainer');
   Words.getAllCards().forEach((item) => {
     const stat = LocalStorage.getStatistics(item.name);
     const correctAnswers = calculateAnswers(stat)[0];
@@ -157,17 +159,34 @@ const onResetClick = () => {
 
 const showResults = () => {
   HtmlHelper.clearHtml('main');
-  HtmlHelper.append(
-    document.getElementById('main'),
-    HtmlHelper.create({
-      name: 'div',
-      className: 'total-errors',
-      text: `Total errors: ${localStorage.getItem('totalErrors')}`,
-    }),
-  );
+  const total = localStorage.getItem('totalErrors');
+
+  const successImage = HtmlHelper.create({
+    name: 'img',
+    attributes: [{ name: 'src', value: '../assets/img/success.png' }],
+  });
+  const failureImage = HtmlHelper.create({
+    name: 'img',
+    attributes: [{ name: 'src', value: '../assets/img/failure.png' }],
+  });
+  const container = HtmlHelper.create({
+    name: 'div',
+    className: 'total-errors',
+    text: `Total errors: ${total}`,
+  });
+  HtmlHelper.append(HtmlHelper.getElement('main'), container);
+  if (total < 1) {
+    HtmlHelper.append(container, successImage);
+    SoundPlayer.play('success');
+  } else {
+    HtmlHelper.append(container, failureImage);
+    SoundPlayer.play('failure');
+  }
+  // setTimeout(() => {
+  //   Router.navigateToMain();
+  // }, 5000); // gali buti beda, patikrinti kai veiks sound
   HtmlHelper.toggleVisibility('start', false);
-  // HtmlHelper.changeInnerText('start', 'restart');
-  return document.getElementById('main');
+  return HtmlHelper.getElement('main');
 };
 
 module.exports = { create, showResults };

@@ -1,14 +1,15 @@
 const HtmlHelper = require('../utils/HtmlHelper');
 
 const create = () => {
-  if (document.getElementById('stars')) return;
-  HtmlHelper.append(document.getElementById('main'), HtmlHelper.create({
+  if (HtmlHelper.getElement('stars')) return;
+  HtmlHelper.append(HtmlHelper.getElement('main'), HtmlHelper.create({
     name: 'div',
     id: 'stars',
   }));
 };
 
 const add = (value) => {
+  const parent = HtmlHelper.getElement('stars');
   let star;
   if (value) {
     star = HtmlHelper.create({
@@ -23,7 +24,12 @@ const add = (value) => {
       attributes: [{ name: 'src', value: '../assets/img/star-wrong.png' }],
     });
   }
-  HtmlHelper.append(document.getElementById('stars'), star);
+  HtmlHelper.append(parent, star);
+  console.log(HtmlHelper.getElement('stars').clientHeight);
+  if (HtmlHelper.getElement('stars').clientHeight > 60) {
+    console.log('removinu');
+    parent.removeChild(parent.firstChild);
+  }
 };
 
 module.exports = { create, add };

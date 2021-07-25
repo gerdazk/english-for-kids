@@ -19,13 +19,14 @@ function changeStatistics(name, key) {
 function createStatistics() {
   const stat = {
     clicked: 0,
-    state: false,
     correct: 0,
     wrong: 0,
   };
 
   Words.getAllCardNames().forEach((item) => {
-    localStorage.setItem(item, JSON.stringify(stat));
+    if (!localStorage.getItem(item)) {
+      localStorage.setItem(item, JSON.stringify(stat));
+    }
   });
 }
 
@@ -40,10 +41,11 @@ const changeRandomCard = (item) => {
 };
 
 const setTotalErrors = () => {
-  const errors = localStorage.getItem('totalErrrors');
+  const errors = localStorage.getItem('totalErrors');
   if (errors) {
-    localStorage.setItem('totalErrors', errors + 1);
+    localStorage.setItem('totalErrors', Number(errors) + 1);
   } else {
+    console.log('ner errors', errors);
     localStorage.setItem('totalErrors', 1);
   }
 };

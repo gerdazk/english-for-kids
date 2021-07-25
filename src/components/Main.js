@@ -19,7 +19,7 @@ const createStatisticsButton = (navigateToStatistics) => {
   });
   HtmlHelper.append(parent, image);
   HtmlHelper.append(parent, element);
-  HtmlHelper.append(document.getElementById('main'), parent);
+  HtmlHelper.append(HtmlHelper.getElement('main'), parent);
 };
 
 const create = (navigateToExactCategory, navigateToStatistics) => {
@@ -46,7 +46,7 @@ const create = (navigateToExactCategory, navigateToStatistics) => {
     });
     HtmlHelper.append(parent, image);
     HtmlHelper.append(parent, element);
-    HtmlHelper.append(document.getElementById('main'), parent);
+    HtmlHelper.append(HtmlHelper.getElement('main'), parent);
   });
 
   createStatisticsButton(navigateToStatistics);

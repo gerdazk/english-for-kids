@@ -5,26 +5,21 @@ const changeActiveElement = (elem) => {
   const active = document.getElementsByClassName('active');
   while (active[0]) {
     HtmlHelper.toggleClassList(active[0].id, 'active', 'remove');
-    // active[0].classList.remove('active');
   }
   HtmlHelper.toggleClassList(elem, 'active', 'add');
-  // document.getElementById(elem).classList.add('active');
 };
 
 const open = (value) => {
-  // const menu = document.getElementById('menuContainer');
   if (value) {
     HtmlHelper.toggleClassList('menuContainer', 'show', 'add');
-    // menu.classList.add('show');
   } else {
     HtmlHelper.toggleClassList('menuContainer', 'show', 'remove');
-    // menu.classList.remove('show');
   }
 };
 
 const toggleMenu = () => {
-  const menu = document.getElementById('menuIcon');
-  const data = JSON.parse(menu.getAttribute('data'));
+  const menu = HtmlHelper.getElement('menuIcon');
+  const data = HtmlHelper.getElementData(menu);
   if (data.open) {
     data.open = false;
     open(false);
@@ -32,19 +27,25 @@ const toggleMenu = () => {
     data.open = true;
     open(true);
   }
-  menu.setAttribute('data', JSON.stringify(data));
+  HtmlHelper.setElementData(menu, data);
+  // menu.setAttribute('data', JSON.stringify(data));
 };
 
 const close = () => {
-  const menu = document.getElementById('menuIcon');
-  const data = JSON.parse(menu.getAttribute('data'));
+  const menu = HtmlHelper.getElement('menuIcon');
+  const data = HtmlHelper.getElementData(menu);
   data.open = false;
-  menu.setAttribute('data', JSON.stringify(data));
+  HtmlHelper.setElementData(menu, data);
+  // menu.setAttribute('data', JSON.stringify(data));
   open(false);
 };
 
-const createButtons = (onStatisticsClick, onMainClick, onExactCategoryClick) => {
-  const container = document.getElementById('menuContainer');
+const createButtons = (
+  onStatisticsClick,
+  onMainClick,
+  onExactCategoryClick,
+) => {
+  const container = HtmlHelper.getElement('menuContainer');
 
   const statistics = HtmlHelper.create({
     text: 'statistics',
@@ -108,17 +109,28 @@ const create = (onStatisticsClick, onMainClick, onExactCategoryClick) => {
     name: 'img',
     attributes: [{ name: 'src', value: './assets/img/menu.png' }],
     className: 'menu-icon',
+    id: 'menuIconImage',
   });
   const container = HtmlHelper.create({
     id: 'menuContainer',
     name: 'div',
     className: 'menu-container',
   });
-  const nav = document.getElementById('nav');
+  const nav = HtmlHelper.getElement('nav');
   HtmlHelper.append(nav, icon);
   HtmlHelper.append(icon, image);
   HtmlHelper.append(nav, container);
   open(false);
+  document.addEventListener('click', (e) => {
+    if (
+      e.target.id !== 'menuContainer'
+      && !container.contains(e.target)
+      && e.target.id !== 'menuIcon'
+      && e.target.id !== 'menuIconImage'
+    ) {
+      close();
+    }
+  });
   createButtons(onStatisticsClick, onMainClick, onExactCategoryClick);
 };
 

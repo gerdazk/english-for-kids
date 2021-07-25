@@ -2,6 +2,10 @@ function append(parent, child) {
   return parent.appendChild(child);
 }
 
+const getElement = (id) => document.getElementById(id);
+
+const setElementData = (element, data) => element.setAttribute('data', JSON.stringify(data));
+
 function create({
   name,
   text,
@@ -19,8 +23,7 @@ function create({
   }
 
   if (data) {
-    // todo, prideti visus data prie attributes
-    element.setAttribute('data', JSON.stringify(data));
+    setElementData(element, data);
   }
 
   if (text) {
@@ -53,15 +56,15 @@ function create({
 }
 
 function changeInnerText(id, text) {
-  document.getElementById(id).innerHTML = text;
+  getElement(id).innerHTML = text;
 }
 
 function clearHtml(id) {
-  document.getElementById(id).innerHTML = '';
+  getElement(id).innerHTML = '';
 }
 
 const toggleVisibility = (id, value) => {
-  const element = document.getElementById(id);
+  const element = getElement(id);
   if (!element) {
     return;
   }
@@ -74,13 +77,15 @@ const toggleVisibility = (id, value) => {
 
 const toggleClassList = (id, className, operation) => {
   if (operation === 'add') {
-    document.getElementById(id).classList.add(className);
+    getElement(id).classList.add(className);
   } else {
-    document.getElementById(id).classList.remove(className);
+    getElement(id).classList.remove(className);
   }
 };
 
 const getElementData = (element) => JSON.parse(element.getAttribute('data'));
+
+// const getDataAttribute = (element, attribute) => getElementData(element)[attribute];
 
 module.exports = {
   append,
@@ -90,4 +95,7 @@ module.exports = {
   toggleVisibility,
   getElementData,
   toggleClassList,
+  getElement,
+  setElementData,
+  // getDataAttribute,
 };

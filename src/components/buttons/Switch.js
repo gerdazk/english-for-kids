@@ -3,9 +3,9 @@ const LocalStorage = require('../../utils/LocalStorage');
 
 function create(handleChange) {
   LocalStorage.setSwitch('train');
-  const button = document.getElementById('switch');
-  document.getElementById('checkbox').addEventListener('change', handleChange);
-  HtmlHelper.append(document.getElementById('nav'), button);
+  const button = HtmlHelper.getElement('switch');
+  HtmlHelper.getElement('checkbox').addEventListener('change', handleChange);
+  HtmlHelper.append(HtmlHelper.getElement('nav'), button);
 }
 
 module.exports = { create };

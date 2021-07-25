@@ -1,5 +1,6 @@
-const { LocalStorage } = require('.'); // TODO
+const LocalStorage = require('./LocalStorage');
 const Statistics = require('../components/Statistics');
+const HtmlHelper = require('./HtmlHelper');
 
 function play(name) {
   const audio = new Audio(`./assets/audio/${name}.mp3`);
@@ -8,12 +9,11 @@ function play(name) {
 
 const playRandom = (collection) => {
   const filteredCollection = collection.filter(
-    (item) => JSON.parse(
-      document.getElementById(`${item.name}Container`).getAttribute('data'),
-    ).disabled !== true,
+    (item) => HtmlHelper.getElementData(HtmlHelper.getElement(`${item.name}Container`)).disabled !== true,
   );
   if (!filteredCollection.length) {
     localStorage.setItem('activeGame', false);
+    console.log('setinu i false');
     Statistics.showResults();
   }
   const item = filteredCollection[Math.floor(Math.random() * filteredCollection.length)]
@@ -23,7 +23,7 @@ const playRandom = (collection) => {
 };
 
 const playEvaluated = (answer, disabled) => {
-  if (disabled || localStorage.getItem('randomCard') === undefined) return;
+  if (disabled) return;
   if (answer) {
     play('correct');
   } else {

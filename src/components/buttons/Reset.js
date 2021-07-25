@@ -1,7 +1,7 @@
 const { HtmlHelper } = require('../../utils');
 
 const create = (handleClick) => {
-  if (document.getElementById('reset')) return;
+  if (HtmlHelper.getElement('reset')) return;
   HtmlHelper.append(
     document.body,
     HtmlHelper.create({
