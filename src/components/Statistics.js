@@ -1,4 +1,3 @@
-const StartButton = require('./buttons/StartButton');
 const Reset = require('./buttons/Reset');
 const Words = require('../utils/Words');
 const LocalStorage = require('../utils/LocalStorage');
@@ -147,7 +146,7 @@ const create = () => {
   });
   // eslint-disable-next-line no-use-before-define
   Reset.create(onResetClick);
-  HtmlHelper.toggleVisibility('reset', false);
+  HtmlHelper.toggleVisibility('reset', true);
 };
 
 const onResetClick = () => {
@@ -162,10 +161,12 @@ const showResults = () => {
     document.getElementById('main'),
     HtmlHelper.create({
       name: 'div',
+      className: 'total-errors',
       text: `Total errors: ${localStorage.getItem('totalErrors')}`,
     }),
   );
-  StartButton.toggleDisplay(false);
+  HtmlHelper.toggleVisibility('start', false);
+  // HtmlHelper.changeInnerText('start', 'restart');
   return document.getElementById('main');
 };
 

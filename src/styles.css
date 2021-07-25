@@ -180,7 +180,7 @@ body {
 .menu-button {
   font-size: 16px;
   text-transform: uppercase;
-  padding: 1.5rem 4rem;
+  padding: 1rem 4rem;
   font-weight: 600;
   color: #8e8e8e;
   cursor: pointer;
@@ -297,4 +297,21 @@ body {
 
 .star {
   height: 45px;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.total-errors {
+  background-color: #ecdfe5;
+    box-shadow: 0px 3px 15px rgb(0 0 0 / 20%);
+    border-radius: 33px;
+    padding: 33px;
+    font-size: 22px;
+    color: #f39fc3;
+    font-weight: bold;
+    text-transform: uppercase;
 }

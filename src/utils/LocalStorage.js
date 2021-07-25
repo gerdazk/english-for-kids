@@ -1,26 +1,18 @@
 const Words = require('./Words');
 
-function setSwitch(key, value) {
-  return localStorage.setItem(key, value);
+function setSwitch(value) {
+  return localStorage.setItem('switch', value);
 }
 
 function getSwitch() {
   return localStorage.getItem('switch');
 }
 
-// todo. vienas state pakeitimui, kitas clicked logikai
 function changeStatistics(name, key) {
   const storedData = JSON.parse(localStorage.getItem(name));
   if (key === 'clicked' || key === 'correct' || key === 'wrong') {
     storedData[key] += 1;
-  }
-  if (key === 'state') {
-    if (storedData.state) {
-      storedData.state = false;
-    } else {
-      storedData.state = true;
-    }
-  }
+  } else return;
   localStorage.setItem(name, JSON.stringify(storedData));
 }
 

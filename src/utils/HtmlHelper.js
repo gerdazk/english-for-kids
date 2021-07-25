@@ -18,7 +18,8 @@ function create({
     attributes.forEach((attribute) => element.setAttribute(attribute.name, attribute.value));
   }
 
-  if (data) { // todo, prideti visus data prie attributes
+  if (data) {
+    // todo, prideti visus data prie attributes
     element.setAttribute('data', JSON.stringify(data));
   }
 
@@ -65,15 +66,17 @@ const toggleVisibility = (id, value) => {
     return;
   }
   if (value) {
-    if (id === 'menuContainer') {
-      element.classList.remove('show');
-    } else {
-      element.classList.add('hidden');
-    }
-  } else if (id === 'menuContainer') {
-    element.classList.add('show');
-  } else {
     element.classList.remove('hidden');
+  } else {
+    element.classList.add('hidden');
+  }
+};
+
+const toggleClassList = (id, className, operation) => {
+  if (operation === 'add') {
+    document.getElementById(id).classList.add(className);
+  } else {
+    document.getElementById(id).classList.remove(className);
   }
 };
 
@@ -86,4 +89,5 @@ module.exports = {
   clearHtml,
   toggleVisibility,
   getElementData,
+  toggleClassList,
 };

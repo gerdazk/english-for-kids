@@ -18,19 +18,17 @@ const playRandom = (collection) => {
   }
   const item = filteredCollection[Math.floor(Math.random() * filteredCollection.length)]
     .name;
-  const audio = new Audio(`./assets/audio/${item}.mp3`); // todo perpanaudoti play metoda
   LocalStorage.changeRandomCard(item);
-  return audio.play();
+  return play(item);
 };
 
 const playEvaluated = (answer, disabled) => {
   if (disabled || localStorage.getItem('randomCard') === undefined) return;
   if (answer) {
-    const correct = new Audio('./assets/audio/correct.mp3'); // todo perpanaudoti play metoda
-    correct.play();
+    play('correct');
   } else {
-    const wrong = new Audio('./assets/audio/failure.mp3'); // todo perpanaudoti play metoda
-    wrong.play();
+    play('failure');
   }
 };
+// ar reikalingas isvis sitas metodas?
 module.exports = { play, playRandom, playEvaluated };

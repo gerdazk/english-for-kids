@@ -1,7 +1,8 @@
 const HtmlHelper = require('../utils/HtmlHelper');
 
 const create = () => {
-  HtmlHelper.append(document.body, HtmlHelper.create({
+  if (document.getElementById('stars')) return;
+  HtmlHelper.append(document.getElementById('main'), HtmlHelper.create({
     name: 'div',
     id: 'stars',
   }));

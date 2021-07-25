@@ -27,40 +27,71 @@ const handleMouseLeave = (e) => {
   }
 };
 
-const handleClick = (e) => {
-  const data = JSON.parse(e.currentTarget.getAttribute('data'));
-  if (e.target.id === 'rotate' || e.target.id === 'rotate-image') return;
-  if (LocalStorage.getSwitch('switch') === 'train') {
-    localStorage.setItem('activeGame', false);
-    SoundPlayer.play(data.name);
-    LocalStorage.changeStatistics(data.name, 'clicked');
-  } else {
-    if (!localStorage.getItem('activeGame')) return;
-    const evaluatedAnswer = evaluateClick(data.name);
-    SoundPlayer.playEvaluated(evaluatedAnswer, data.disabled);
-    if (evaluatedAnswer) {
-      LocalStorage.changeStatistics(data.name, 'correct');
-      Stars.add(true);
-      data.disabled = true; // todo
-      disable(data.name);
-      e.currentTarget.setAttribute('data', JSON.stringify(data)); // todo
-      setTimeout(() => {
-        SoundPlayer.playRandom(
-          Words.getData()[localStorage.getItem('currentPage')],
-        );
-      }, 1000);
-    } else if (data.disabled !== true) {
-      LocalStorage.changeStatistics(
-        localStorage.getItem('randomCard'),
-        'wrong',
-      );
-      Stars.add(false);
-      LocalStorage.setTotalErrors();
-    }
+const handleCorrectAnswer = (element) => {
+  const data = JSON.parse(element.getAttribute('data'));
+  LocalStorage.changeStatistics(data.name, 'correct');
+  Stars.add(true);
+  data.disabled = true;
+  disable(data.name);
+  element.setAttribute('data', JSON.stringify(data)); // todo
+  setTimeout(() => {
+    SoundPlayer.playRandom(
+      Words.getData()[localStorage.getItem('currentPage')],
+    );
+  }, 1000);
+};
+
+const handleWrongAnswer = () => {
+  LocalStorage.changeStatistics(localStorage.getItem('randomCard'), 'wrong');
+  Stars.add(false);
+  LocalStorage.setTotalErrors();
+};
+
+const handleTrainMode = (element) => {
+  const data = JSON.parse(element.getAttribute('data'));
+  localStorage.setItem('activeGame', false);
+  SoundPlayer.play(data.name);
+  LocalStorage.changeStatistics(data.name, 'clicked');
+};
+
+const handlePlayMode = (element) => {
+  const data = JSON.parse(element.getAttribute('data'));
+  if (!localStorage.getItem('activeGame')) return;
+  const answer = evaluateClick(data.name);
+  SoundPlayer.playEvaluated(answer, data.disabled);
+  if (answer) {
+    handleCorrectAnswer(element);
+  } else if (data.disabled !== true) {
+    handleWrongAnswer();
   }
 };
 
-const create = (parentElement, categoryData) => {
+const handleClick = (e) => {
+  if (e.target.id === 'rotate' || e.target.id === 'rotate-image') return;
+  if (LocalStorage.getSwitch('switch') === 'train') {
+    handleTrainMode(e.currentTarget);
+    // localStorage.setItem('activeGame', false);
+    // SoundPlayer.play(data.name);
+    // LocalStorage.changeStatistics(data.name, 'clicked');
+  } else {
+    handlePlayMode(e.currentTarget);
+  //   if (!localStorage.getItem('activeGame')) return;
+  //   const answer = evaluateClick(data.name);
+  //   SoundPlayer.playEvaluated(answer, data.disabled);
+  //   if (answer) {
+  //     handleCorrectAnswer(e.currentTarget);
+  //   } else if (data.disabled !== true) {
+  //     handleWrongAnswer();
+    // LocalStorage.changeStatistics(
+    //   localStorage.getItem('randomCard'),
+    //   'wrong',
+    // );
+    // Stars.add(false);
+    // LocalStorage.setTotalErrors();
+  }
+};
+
+const create = (parentId, categoryData) => {
   const parent = HtmlHelper.create({
     name: 'div',
     data: categoryData,
@@ -85,14 +116,6 @@ const create = (parentElement, categoryData) => {
     className: 'card',
   });
 
-  // const cardTrainBack = HtmlHelper.create({
-  //   name: 'div',
-  //   id: categoryData.nameLT,
-  //   text: categoryData.nameLT,
-  //   image,
-  //   className: ['card', 'card-back'],
-  // });
-
   const cardTrain = HtmlHelper.create({
     name: 'div',
     id: categoryData.name,
@@ -100,14 +123,12 @@ const create = (parentElement, categoryData) => {
     image,
     className: ['card', 'card-front'],
   });
-
-  HtmlHelper.append(parentElement, parent);
+  HtmlHelper.append(document.getElementById(parentId), parent);
   HtmlHelper.append(parent, image);
   if (LocalStorage.getSwitch() === 'play') {
     HtmlHelper.append(parent, cardPlay);
   } else {
     HtmlHelper.append(parent, cardTrain);
-    // HtmlHelper.append(parent, cardTrainBack);
     Rotate.create(parent, categoryData);
   }
 };

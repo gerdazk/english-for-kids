@@ -12,7 +12,7 @@ const create = (handleClick) => {
       className: 'button-blue',
     }),
   );
-  HtmlHelper.toggleVisibility('reset', true);
+  HtmlHelper.toggleVisibility('reset', false);
 };
 
 module.exports = { create };

@@ -4,9 +4,22 @@ const Words = require('../utils/Words');
 const changeActiveElement = (elem) => {
   const active = document.getElementsByClassName('active');
   while (active[0]) {
-    active[0].classList.remove('active');
+    HtmlHelper.toggleClassList(active[0].id, 'active', 'remove');
+    // active[0].classList.remove('active');
   }
-  document.getElementById(elem).classList.add('active');
+  HtmlHelper.toggleClassList(elem, 'active', 'add');
+  // document.getElementById(elem).classList.add('active');
+};
+
+const open = (value) => {
+  // const menu = document.getElementById('menuContainer');
+  if (value) {
+    HtmlHelper.toggleClassList('menuContainer', 'show', 'add');
+    // menu.classList.add('show');
+  } else {
+    HtmlHelper.toggleClassList('menuContainer', 'show', 'remove');
+    // menu.classList.remove('show');
+  }
 };
 
 const toggleMenu = () => {
@@ -14,10 +27,10 @@ const toggleMenu = () => {
   const data = JSON.parse(menu.getAttribute('data'));
   if (data.open) {
     data.open = false;
-    HtmlHelper.toggleVisibility('menuContainer', true);
+    open(false);
   } else {
     data.open = true;
-    HtmlHelper.toggleVisibility('menuContainer', false);
+    open(true);
   }
   menu.setAttribute('data', JSON.stringify(data));
 };
@@ -27,7 +40,7 @@ const close = () => {
   const data = JSON.parse(menu.getAttribute('data'));
   data.open = false;
   menu.setAttribute('data', JSON.stringify(data));
-  HtmlHelper.toggleVisibility('menuContainer', true);
+  open(false);
 };
 
 const createButtons = (onStatisticsClick, onMainClick, onExactCategoryClick) => {
@@ -101,12 +114,11 @@ const create = (onStatisticsClick, onMainClick, onExactCategoryClick) => {
     name: 'div',
     className: 'menu-container',
   });
-
-  HtmlHelper.append(document.getElementById('nav'), icon);
+  const nav = document.getElementById('nav');
+  HtmlHelper.append(nav, icon);
   HtmlHelper.append(icon, image);
-  HtmlHelper.append(document.getElementById('nav'), container);
-
-  HtmlHelper.toggleVisibility('menuContainer', true);
+  HtmlHelper.append(nav, container);
+  open(false);
   createButtons(onStatisticsClick, onMainClick, onExactCategoryClick);
 };
 

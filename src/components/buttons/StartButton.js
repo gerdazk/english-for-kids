@@ -31,15 +31,7 @@ const create = () => {
   HtmlHelper.append(document.body, HtmlHelper.create({
     name: 'button', text: 'start', id: 'start', handleClick, className: 'button-blue',
   }));
-  HtmlHelper.toggleVisibility('start', true);
+  HtmlHelper.toggleVisibility('start', false);
 };
 
-const toggleDisplay = (state) => {
-  if (state) {
-    HtmlHelper.toggleVisibility('start', false);
-  } else {
-    HtmlHelper.toggleVisibility('start', true);
-  }
-};
-
-module.exports = { create, toggleDisplay };
+module.exports = { create };

@@ -3,7 +3,6 @@ const Category = require('./Category');
 const Statistics = require('./Statistics');
 const Main = require('./Main');
 const Menu = require('./Menu');
-const StartButton = require('./buttons/StartButton');
 const LocalStorage = require('../utils/LocalStorage');
 const Stars = require('./Stars');
 
@@ -15,15 +14,15 @@ const afterRouteCompleted = (name) => {
 
 const navigateToExactCategory = (e) => {
   HtmlHelper.clearHtml('main');
-  HtmlHelper.toggleVisibility('reset', true);
+  HtmlHelper.toggleVisibility('reset', false);
   const { name } = HtmlHelper.getElementData(e.currentTarget);
-  Category.create(document.getElementById('main'), name);
+  Category.create(name);
   afterRouteCompleted(name);
 };
 
 const navigateToStatistics = () => {
   HtmlHelper.clearHtml('main');
-  HtmlHelper.toggleVisibility('reset', true);
+  HtmlHelper.toggleVisibility('reset', false);
   Statistics.create();
   afterRouteCompleted('statistics');
 };
@@ -37,21 +36,21 @@ const navigateToMain = () => {
 const navigateToGameMode = () => {
   const currentPage = localStorage.getItem('currentPage');
   if (LocalStorage.getSwitch() === 'train') {
-    LocalStorage.setSwitch('switch', 'play');
+    LocalStorage.setSwitch('play');
     if (currentPage !== 'main' && currentPage !== 'statistics') {
-      StartButton.toggleDisplay(true);
+      HtmlHelper.toggleVisibility('start', true);
       HtmlHelper.clearHtml('main');
       Stars.create();
-      Category.create(document.getElementById('main'), localStorage.getItem('currentPage'));
+      Category.create(localStorage.getItem('currentPage'));
     } else {
-      StartButton.toggleDisplay(false);
+      HtmlHelper.toggleVisibility('start', false);
     }
   } else {
-    LocalStorage.setSwitch('switch', 'train');
-    StartButton.toggleDisplay(false);
+    LocalStorage.setSwitch('train');
+    HtmlHelper.toggleVisibility('start', false);
     if (currentPage !== 'main' && currentPage !== 'statistics') {
       HtmlHelper.clearHtml('main');
-      Category.create(document.getElementById('main'), localStorage.getItem('currentPage'));
+      Category.create(localStorage.getItem('currentPage'));
     }
   }
 };
