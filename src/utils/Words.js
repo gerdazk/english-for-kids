@@ -342,9 +342,91 @@ const cards = {
     {
       name: 'laugh',
       nameLT: 'juoktis',
-      media: 'laugh',
-      state: 'closed',
       category: 'action2',
+    },
+  ],
+  fruit: [
+    {
+      name: 'banana',
+      nameLT: 'bananas',
+      category: 'fruit',
+    },
+    {
+      name: 'peach',
+      nameLT: 'persikas',
+      category: 'fruit',
+    },
+    {
+      name: 'apple',
+      nameLT: 'obuolys',
+      category: 'fruit',
+    },
+    {
+      name: 'grape',
+      nameLT: 'vynuogė',
+      category: 'fruit',
+    },
+    {
+      name: 'strawberry',
+      nameLT: 'braškė',
+      category: 'fruit',
+    },
+    {
+      name: 'cherry',
+      nameLT: 'vyšnia',
+      category: 'fruit',
+    },
+    {
+      name: 'watermelon',
+      nameLT: 'arbūzas',
+      category: 'fruit',
+    },
+    {
+      name: 'pineapple',
+      nameLT: 'ananasas',
+      category: 'fruit',
+    },
+  ],
+  vegetables: [
+    {
+      name: 'carrot',
+      nameLT: 'morka',
+      category: 'vegetables',
+    },
+    {
+      name: 'cucumber',
+      nameLT: 'agurkas',
+      category: 'vegetables',
+    },
+    {
+      name: 'onion',
+      nameLT: 'svogūnas',
+      category: 'vegetables',
+    },
+    {
+      name: 'broccoli',
+      nameLT: 'brokolis',
+      category: 'vegetables',
+    },
+    {
+      name: 'lettuce',
+      nameLT: 'salota',
+      category: 'vegetables',
+    },
+    {
+      name: 'potato',
+      nameLT: 'bulvė',
+      category: 'vegetables',
+    },
+    {
+      name: 'mushroom',
+      nameLT: 'grybas',
+      category: 'vegetables',
+    },
+    {
+      name: 'tomato',
+      nameLT: 'pomidoras',
+      category: 'vegetables',
     },
   ],
 };
