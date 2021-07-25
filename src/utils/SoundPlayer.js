@@ -7,7 +7,6 @@ function play(name) {
 }
 
 const playRandom = (collection) => {
-  console.log(collection);
   const filteredCollection = collection.filter(
     (item) => JSON.parse(
       document.getElementById(`${item.name}Container`).getAttribute('data'),
@@ -25,7 +24,6 @@ const playRandom = (collection) => {
 };
 
 const playEvaluated = (answer, disabled) => {
-  console.log(localStorage.getItem('randomCard') === undefined);
   if (disabled || localStorage.getItem('randomCard') === undefined) return;
   if (answer) {
     const correct = new Audio('./assets/audio/correct.mp3'); // todo perpanaudoti play metoda

@@ -295,3 +295,7 @@ body {
 .statistics-container {
   width: 100%;
 }
+
+.star {
+  height: 45px;
+}

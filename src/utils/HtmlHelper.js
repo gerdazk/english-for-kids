@@ -1,5 +1,4 @@
 function append(parent, child) {
-  console.log(parent, child);
   return parent.appendChild(child);
 }
 

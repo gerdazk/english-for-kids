@@ -3,6 +3,7 @@ const SoundPlayer = require('../utils/SoundPlayer');
 const LocalStorage = require('../utils/LocalStorage');
 const Words = require('../utils/Words');
 const Rotate = require('./Rotate');
+const Stars = require('./Stars');
 
 const evaluateClick = (item) => localStorage.getItem('randomCard') === item;
 
@@ -39,6 +40,7 @@ const handleClick = (e) => {
     SoundPlayer.playEvaluated(evaluatedAnswer, data.disabled);
     if (evaluatedAnswer) {
       LocalStorage.changeStatistics(data.name, 'correct');
+      Stars.add(true);
       data.disabled = true; // todo
       disable(data.name);
       e.currentTarget.setAttribute('data', JSON.stringify(data)); // todo
@@ -52,6 +54,7 @@ const handleClick = (e) => {
         localStorage.getItem('randomCard'),
         'wrong',
       );
+      Stars.add(false);
       LocalStorage.setTotalErrors();
     }
   }

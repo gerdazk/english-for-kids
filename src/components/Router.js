@@ -5,6 +5,7 @@ const Main = require('./Main');
 const Menu = require('./Menu');
 const StartButton = require('./buttons/StartButton');
 const LocalStorage = require('../utils/LocalStorage');
+const Stars = require('./Stars');
 
 const afterRouteCompleted = (name) => {
   localStorage.setItem('currentPage', name);
@@ -40,6 +41,7 @@ const navigateToGameMode = () => {
     if (currentPage !== 'main' && currentPage !== 'statistics') {
       StartButton.toggleDisplay(true);
       HtmlHelper.clearHtml('main');
+      Stars.create();
       Category.create(document.getElementById('main'), localStorage.getItem('currentPage'));
     } else {
       StartButton.toggleDisplay(false);
