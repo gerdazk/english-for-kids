@@ -60,7 +60,6 @@ const navigateToGameMode = () => {
     HtmlHelper.clearHtml('start');
     HtmlHelper.changeInnerText('start', 'start game');
     setGameMode();
-    console.log('setinu i false');
     localStorage.setItem('activeGame', false);
   } else {
     LocalStorage.setSwitch('train');

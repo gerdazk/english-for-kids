@@ -21,11 +21,9 @@ const resetDisabled = () => {
 
 const handleClick = () => {
   const isActive = localStorage.getItem('activeGame');
-  console.log(isActive);
   if (isActive !== 'true') {
     LocalStorage.changeRandomCard(undefined);
     localStorage.setItem('activeGame', true);
-    console.log('setinu i true');
     localStorage.setItem('totalErrors', 0);
     HtmlHelper.clearHtml('start');
     HtmlHelper.append(HtmlHelper.getElement('start'), HtmlHelper.create({

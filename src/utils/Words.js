@@ -340,7 +340,6 @@ const cards = {
 const getAllCards = () => {
   const result = [];
   const keys = Object.keys(cards);
-  // let childKeys;
   keys.map((key) => {
     Object.keys(cards[key]).map((childKey) => {
       result.push(cards[key][childKey]);
@@ -348,12 +347,6 @@ const getAllCards = () => {
     });
     return result;
   });
-  // for (let i = 0; i < keys.length; i += 1) {
-  //   for (let j = 0; j < cards[keys[i]].length; j += 1) {
-  //     childKeys = Object.keys(cards[keys[i]]);
-  //     result.push(cards[keys[i]][childKeys[j]]);
-  //   }
-  // }
   return result;
 };
 

@@ -24,7 +24,7 @@ function createStatistics() {
   };
 
   Words.getAllCardNames().forEach((item) => {
-    if (!localStorage.getItem(item)) {
+    if (!localStorage.getItem(item) || localStorage.getItem('reset') === 'true') {
       localStorage.setItem(item, JSON.stringify(stat));
     }
   });
@@ -45,11 +45,11 @@ const setTotalErrors = () => {
   if (errors) {
     localStorage.setItem('totalErrors', Number(errors) + 1);
   } else {
-    console.log('ner errors', errors);
     localStorage.setItem('totalErrors', 1);
   }
 };
 
+const getCards = () => ({ ...localStorage });
 module.exports = {
   setSwitch,
   getSwitch,
@@ -59,4 +59,5 @@ module.exports = {
   changeCurrentPage,
   changeRandomCard,
   setTotalErrors,
+  getCards,
 };

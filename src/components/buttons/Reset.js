@@ -1,4 +1,4 @@
-const { HtmlHelper } = require('../../utils');
+const HtmlHelper = require('../../utils/HtmlHelper');
 
 const create = (handleClick) => {
   if (HtmlHelper.getElement('reset')) return;

@@ -9,12 +9,10 @@ const evaluateClick = (item) => localStorage.getItem('randomCard') === item;
 
 const disable = (name) => {
   HtmlHelper.getElement(`${name}Container`).classList.add('disabled');
-  // document.getElementById(`${name}Container`).classList.add('disabled');
 };
 
 const handleMouseLeave = (e) => {
   const data = HtmlHelper.getElementData(e.currentTarget);
-  // const data = JSON.parse(e.currentTarget.getAttribute('data'));
   if (HtmlHelper.getElement(data.name).innerHTML === data.nameLT) {
     // todo
     setTimeout(() => {
@@ -35,7 +33,6 @@ const handleCorrectAnswer = (element) => {
   data.disabled = true;
   disable(data.name);
   HtmlHelper.setElementData(element, data);
-  // element.setAttribute('data', JSON.stringify(data)); // todo
   setTimeout(() => {
     SoundPlayer.playRandom(
       Words.getData()[localStorage.getItem('currentPage')],
@@ -51,9 +48,10 @@ const handleWrongAnswer = () => {
 
 const handleTrainMode = (element) => {
   const data = HtmlHelper.getElementData(element);
-  console.log('setinu i false');
   localStorage.setItem('activeGame', false);
-  SoundPlayer.play(data.name);
+  if (!element.classList.contains('is-flipped')) {
+    SoundPlayer.play(data.name);
+  }
   LocalStorage.changeStatistics(data.name, 'clicked');
 };
 

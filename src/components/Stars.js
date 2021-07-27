@@ -25,9 +25,7 @@ const add = (value) => {
     });
   }
   HtmlHelper.append(parent, star);
-  console.log(HtmlHelper.getElement('stars').clientHeight);
   if (HtmlHelper.getElement('stars').clientHeight > 60) {
-    console.log('removinu');
     parent.removeChild(parent.firstChild);
   }
 };

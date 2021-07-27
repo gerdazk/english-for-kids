@@ -2,7 +2,7 @@ const Reset = require('./buttons/Reset');
 const Words = require('../utils/Words');
 const LocalStorage = require('../utils/LocalStorage');
 const HtmlHelper = require('../utils/HtmlHelper');
-const SoundPlayer = require('../utils/SoundPlayer');
+// const SoundPlayer = require('../utils/SoundPlayer');
 // const Router = require('./Router');
 
 const createColumns = () => {
@@ -152,9 +152,11 @@ const create = () => {
 };
 
 const onResetClick = () => {
+  localStorage.setItem('reset', true);
   LocalStorage.createStatistics();
   HtmlHelper.clearHtml('main');
   create();
+  localStorage.setItem('reset', false);
 };
 
 const showResults = () => {
@@ -177,10 +179,10 @@ const showResults = () => {
   HtmlHelper.append(HtmlHelper.getElement('main'), container);
   if (total < 1) {
     HtmlHelper.append(container, successImage);
-    SoundPlayer.play('success');
+    // SoundPlayer.play('success');
   } else {
     HtmlHelper.append(container, failureImage);
-    SoundPlayer.play('failure');
+    // SoundPlayer.play('failure');
   }
   // setTimeout(() => {
   //   Router.navigateToMain();
