@@ -5,6 +5,7 @@ const create = () => {
   HtmlHelper.append(HtmlHelper.getElement('main'), HtmlHelper.create({
     name: 'div',
     id: 'stars',
+    className: 'stars',
   }));
 };
 
@@ -25,9 +26,9 @@ const add = (value) => {
     });
   }
   HtmlHelper.append(parent, star);
-  if (HtmlHelper.getElement('stars').clientHeight > 60) {
-    parent.removeChild(parent.firstChild);
-  }
+  // if (HtmlHelper.getElement('stars').clientHeight > 60) {
+  //   parent.removeChild(parent.firstChild);
+  // }
 };
 
 module.exports = { create, add };

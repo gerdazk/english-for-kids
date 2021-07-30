@@ -119,7 +119,7 @@ const create = (onStatisticsClick, onMainClick, onExactCategoryClick) => {
   const nav = HtmlHelper.getElement('nav');
   HtmlHelper.append(nav, icon);
   HtmlHelper.append(icon, image);
-  HtmlHelper.append(nav, container);
+  HtmlHelper.append(document.getElementById('sidenav'), container);
   open(false);
   document.addEventListener('click', (e) => {
     if (

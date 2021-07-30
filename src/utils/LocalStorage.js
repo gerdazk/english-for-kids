@@ -50,6 +50,7 @@ const setTotalErrors = () => {
 };
 
 const getCards = () => ({ ...localStorage });
+
 module.exports = {
   setSwitch,
   getSwitch,

@@ -5,7 +5,27 @@ const HtmlHelper = require('../utils/HtmlHelper');
 // const SoundPlayer = require('../utils/SoundPlayer');
 // const Router = require('./Router');
 
+const handleSorting = (e) => {
+  const current = localStorage.getItem('sort');
+  if (current === e.target.id) {
+    if (localStorage.getItem('reverse') === 'true') {
+      localStorage.setItem('sort', undefined);
+      localStorage.setItem('reverse', false);
+      // e.target.innerHTML = e.target.id.toUpperCase();
+    } else {
+      localStorage.setItem('reverse', true);
+      // e.target.innerHTML = `${e.target.id.toUpperCase()}↑`;
+    }
+  } else {
+    localStorage.setItem('reverse', false);
+    localStorage.setItem('sort', e.target.id);
+    // e.target.innerHTML = `${e.target.id.toUpperCase()}↓`;
+  }
+  // create();
+};
+
 const createColumns = () => {
+  console.log(LocalStorage.getCards());
   const container = HtmlHelper.create({
     id: 'statisticsContainer',
     name: 'div',
@@ -20,37 +40,49 @@ const createColumns = () => {
   const name = HtmlHelper.create({
     text: 'WORD',
     name: 'div',
+    id: 'name',
     className: 'cell',
+    handleClick: handleSorting,
   });
 
   const nameLT = HtmlHelper.create({
     text: 'TRANSLATION',
     name: 'div',
+    id: 'nameLT',
     className: 'cell',
+    handleClick: handleSorting,
   });
 
   const category = HtmlHelper.create({
     text: 'CATEGORY',
     name: 'div',
+    id: 'category',
     className: 'cell',
+    handleClick: handleSorting,
   });
 
   const clicked = HtmlHelper.create({
     text: 'CLICKED',
     name: 'div',
+    id: 'clicked',
     className: 'cell',
+    handleClick: handleSorting,
   });
 
   const correct = HtmlHelper.create({
     text: 'CORRECT',
     name: 'div',
+    id: 'correct',
     className: 'cell',
+    handleClick: handleSorting,
   });
 
   const wrong = HtmlHelper.create({
     text: 'WRONG',
     name: 'div',
+    id: 'wrong',
     className: 'cell',
+    handleClick: handleSorting,
   });
 
   const main = HtmlHelper.getElement('main');
@@ -86,11 +118,45 @@ const calculateAnswers = (data) => {
   return [correct, wrong];
 };
 
+const sortWords = () => {
+  const sortBy = localStorage.getItem('sort');
+  const reverse = localStorage.getItem('reverse');
+  let words = Words.getAllCards();
+  if (!sortBy) {
+    return words;
+  }
+  if (sortBy === 'name' || sortBy === 'nameLT' || sortBy === 'category') {
+    words = words
+      .sort((a, b) => a[sortBy].toLowerCase().localeCompare(b[sortBy].toLowerCase()));
+  } else if (sortBy === 'clicked') {
+    words = words.sort(
+      (a, b) => LocalStorage.getStatistics(a.name)[sortBy]
+        - LocalStorage.getStatistics(b.name)[sortBy],
+    );
+  } else {
+    words = words
+      .sort((a, b) => {
+        const dataA = calculateAnswers(LocalStorage.getStatistics(a.name));
+        const dataB = calculateAnswers(LocalStorage.getStatistics(b.name));
+        if (sortBy === 'correct') {
+          return dataA[0]
+            - dataB[0];
+        }
+        return dataA[1] - dataB[1];
+      });
+  }
+  if (reverse === 'true') {
+    return words.reverse();
+  }
+  return words;
+};
+
 const create = () => {
   localStorage.setItem('currentPage', 'statistics');
   createColumns();
   const container = HtmlHelper.getElement('statisticsContainer');
-  Words.getAllCards().forEach((item) => {
+  const words = sortWords();
+  words.forEach((item) => {
     const stat = LocalStorage.getStatistics(item.name);
     const correctAnswers = calculateAnswers(stat)[0];
     const wrongAnswers = calculateAnswers(stat)[1];

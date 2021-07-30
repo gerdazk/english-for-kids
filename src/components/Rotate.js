@@ -1,4 +1,5 @@
-const { LocalStorage, HtmlHelper } = require('../utils');
+const LocalStorage = require('../utils/LocalStorage');
+const HtmlHelper = require('../utils/HtmlHelper');
 
 const handleClick = (e) => {
   const data = HtmlHelper.getElementData(e.target.parentElement);

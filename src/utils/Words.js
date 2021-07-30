@@ -355,6 +355,7 @@ const getAllCategories = () => Object.keys(cards);
 const getAllCardNames = () => getAllCards(cards).map((item) => item.name);
 
 const getCardsByCategory = (category) => cards[category];
+
 const getData = () => cards;
 
 module.exports = {
