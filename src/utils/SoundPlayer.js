@@ -1,7 +1,6 @@
 const LocalStorage = require('./LocalStorage');
 const Statistics = require('../components/Statistics');
 const HtmlHelper = require('./HtmlHelper');
-// const Router = require('../components/Router');
 
 function play(name) {
   const audio = new Audio(`./assets/audio/${name}.mp3`);
@@ -20,14 +19,11 @@ const playRandom = (collection) => {
     } else {
       play('failure');
     }
-    // setTimeout(() => {
-    //   Router.navigateToMain();
-    // }, 5000);
   } else {
     const item = filteredCollection[Math.floor(Math.random() * filteredCollection.length)]
       .name;
     LocalStorage.changeRandomCard(item);
-    return play(item);
+    setTimeout(() => { play(item); }, 1000);
   }
   return collection;
 };
@@ -40,5 +36,4 @@ const playEvaluated = (answer, disabled) => {
     play('failure');
   }
 };
-// ar reikalingas isvis sitas metodas?
 module.exports = { play, playRandom, playEvaluated };

@@ -3,8 +3,7 @@ const HtmlHelper = require('../utils/HtmlHelper');
 
 const handleClick = (e) => {
   const data = HtmlHelper.getElementData(e.target.parentElement);
-  // localStorage.setItem('activeGame', false);
-  HtmlHelper.changeInnerText(data.name, data.nameLT);
+  HtmlHelper.changeInnerText(data.name, data.translation);
   HtmlHelper.toggleClassList(`${data.name}Container`, 'is-flipped', 'add');
   HtmlHelper.toggleClassList(`${data.name}`, 'is-flipped-child', 'add');
   HtmlHelper.toggleVisibility(`${data.name}rotate`, false);

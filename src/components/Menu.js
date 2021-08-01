@@ -3,6 +3,9 @@ const Words = require('../utils/Words');
 
 const changeActiveElement = (elem) => {
   const active = document.getElementsByClassName('active');
+  if (!active || active.length < 1) {
+    return;
+  }
   while (active[0]) {
     HtmlHelper.toggleClassList(active[0].id, 'active', 'remove');
   }
@@ -28,7 +31,6 @@ const toggleMenu = () => {
     open(true);
   }
   HtmlHelper.setElementData(menu, data);
-  // menu.setAttribute('data', JSON.stringify(data));
 };
 
 const close = () => {
@@ -36,7 +38,6 @@ const close = () => {
   const data = HtmlHelper.getElementData(menu);
   data.open = false;
   HtmlHelper.setElementData(menu, data);
-  // menu.setAttribute('data', JSON.stringify(data));
   open(false);
 };
 

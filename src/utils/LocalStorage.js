@@ -24,13 +24,19 @@ function createStatistics() {
   };
 
   Words.getAllCardNames().forEach((item) => {
-    if (!localStorage.getItem(item) || localStorage.getItem('reset') === 'true') {
+    if (
+      !localStorage.getItem(item)
+      || localStorage.getItem('reset') === 'true'
+    ) {
       localStorage.setItem(item, JSON.stringify(stat));
     }
   });
 }
 
-const getStatistics = (storedData) => JSON.parse(localStorage.getItem(storedData));
+const getStatistics = (storedData) => ({
+  name: storedData,
+  ...JSON.parse(localStorage.getItem(storedData)),
+});
 
 const changeCurrentPage = (item) => {
   localStorage.setItem('currentPage', item);

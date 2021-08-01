@@ -13,13 +13,15 @@ const disable = (name) => {
 
 const handleMouseLeave = (e) => {
   const data = HtmlHelper.getElementData(e.currentTarget);
-  if (HtmlHelper.getElement(data.name).innerHTML === data.nameLT) {
-    // todo
+
+  if (HtmlHelper.getElement(data.name).innerHTML === data.translation) {
     setTimeout(() => {
-      HtmlHelper.getElement(`${data.name}Container`)
-        .classList.remove('is-flipped');
-      HtmlHelper.getElement(`${data.name}`)
-        .classList.remove('is-flipped-child');
+      HtmlHelper.getElement(`${data.name}Container`).classList.remove(
+        'is-flipped',
+      );
+      HtmlHelper.getElement(`${data.name}`).classList.remove(
+        'is-flipped-child',
+      );
       HtmlHelper.changeInnerText(data.name, data.name);
       HtmlHelper.toggleVisibility(`${data.name}rotate`, true);
     }, 300);
@@ -33,11 +35,14 @@ const handleCorrectAnswer = (element) => {
   data.disabled = true;
   disable(data.name);
   HtmlHelper.setElementData(element, data);
-  setTimeout(() => {
+  const currentPage = localStorage.getItem('currentPage');
+  if (currentPage === 'repeat') {
+    SoundPlayer.playRandom(JSON.parse(localStorage.getItem('difficultWords')));
+  } else {
     SoundPlayer.playRandom(
       Words.getData()[localStorage.getItem('currentPage')],
     );
-  }, 1000);
+  }
 };
 
 const handleWrongAnswer = () => {
@@ -51,8 +56,8 @@ const handleTrainMode = (element) => {
   localStorage.setItem('activeGame', false);
   if (!element.classList.contains('is-flipped')) {
     SoundPlayer.play(data.name);
+    LocalStorage.changeStatistics(data.name, 'clicked');
   }
-  LocalStorage.changeStatistics(data.name, 'clicked');
 };
 
 const handlePlayMode = (element) => {
@@ -86,6 +91,11 @@ const create = (parentId, categoryData) => {
     handleMouseLeave,
   });
 
+  const imageContainer = HtmlHelper.create({
+    name: 'div',
+    className: 'image-container',
+  });
+
   const image = HtmlHelper.create({
     name: 'img',
     attributes: [
@@ -112,7 +122,8 @@ const create = (parentId, categoryData) => {
     className: 'card',
   });
   HtmlHelper.append(HtmlHelper.getElement(parentId), parent);
-  HtmlHelper.append(parent, image);
+  HtmlHelper.append(parent, imageContainer);
+  HtmlHelper.append(imageContainer, image);
   if (LocalStorage.getSwitch() === 'play') {
     HtmlHelper.append(parent, cardPlay);
   } else {

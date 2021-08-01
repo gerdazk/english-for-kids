@@ -85,8 +85,6 @@ const toggleClassList = (id, className, operation) => {
 
 const getElementData = (element) => JSON.parse(element.getAttribute('data'));
 
-// const getDataAttribute = (element, attribute) => getElementData(element)[attribute];
-
 module.exports = {
   append,
   create,
@@ -97,5 +95,4 @@ module.exports = {
   toggleClassList,
   getElement,
   setElementData,
-  // getDataAttribute,
 };

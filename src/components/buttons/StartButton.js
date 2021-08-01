@@ -5,6 +5,9 @@ const Words = require('../../utils/Words');
 
 const resetDisabled = () => {
   const disabled = document.getElementsByClassName('disabled');
+  if (!disabled || disabled.length < 1) {
+    return;
+  }
   while (disabled[0]) {
     disabled[0].classList.remove('disabled');
   }
@@ -26,20 +29,41 @@ const handleClick = () => {
     localStorage.setItem('activeGame', true);
     localStorage.setItem('totalErrors', 0);
     HtmlHelper.clearHtml('start');
-    HtmlHelper.append(HtmlHelper.getElement('start'), HtmlHelper.create({
-      name: 'img', className: 'rotate-image', attributes: [{ name: 'src', value: './assets/img/rotate.png' }],
-    }));
+    HtmlHelper.append(
+      HtmlHelper.getElement('start'),
+      HtmlHelper.create({
+        name: 'img',
+        className: 'rotate-image',
+        attributes: [{ name: 'src', value: './assets/img/rotate.png' }],
+      }),
+    );
     resetDisabled();
-    setTimeout(() => { SoundPlayer.playRandom(Words.getData()[localStorage.getItem('currentPage')]); }, 1000);
+    const currentPage = localStorage.getItem('currentPage');
+    if (currentPage === 'repeat') {
+      setTimeout(() => {
+        SoundPlayer.playRandom(JSON.parse(localStorage.getItem('difficultWords')));
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        SoundPlayer.playRandom(Words.getData()[currentPage]);
+      }, 1000);
+    }
   } else {
     SoundPlayer.play(localStorage.getItem('randomCard'));
   }
 };
 
 const create = () => {
-  HtmlHelper.append(document.body, HtmlHelper.create({
-    name: 'button', text: 'start game', id: 'start', handleClick, className: 'button-blue',
-  }));
+  HtmlHelper.append(
+    document.body,
+    HtmlHelper.create({
+      name: 'button',
+      text: 'start game',
+      id: 'start',
+      handleClick,
+      className: 'button-blue',
+    }),
+  );
   HtmlHelper.toggleVisibility('start', false);
 };
 
