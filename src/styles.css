@@ -343,6 +343,7 @@ input:checked + .slider .train {
 
 .table-container {
   min-width: 1000px;
+  margin: 0 auto;
 }
 
 #statistics {
