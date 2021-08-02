@@ -19,11 +19,11 @@ module.exports = {
       patterns: [{ from: "src/assets", to: "assets" }],
     }),
   ],
-  // devServer: {
-  //   contentBase: path.join(__dirname, "dist"),
-  //   compress: true,
-  //   port: 9001,
-  // },
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
+    port: 9001,
+  },
   module: {
     rules: [
       {
