@@ -98,13 +98,13 @@ const create = (navigateToRepeatWords) => {
       });
 
       const correct = HtmlHelper.create({
-        text: JSON.stringify(correctAnswers),
+        text: `${JSON.stringify(correctAnswers)}%`,
         name: 'div',
         className: 'cell',
       });
 
       const wrong = HtmlHelper.create({
-        text: JSON.stringify(wrongAnswers),
+        text: `${JSON.stringify(wrongAnswers)}%`,
         name: 'div',
         className: 'cell',
       });
@@ -171,10 +171,10 @@ const createColumns = (navigateToRepeatWords) => {
   });
 
   const name = HtmlHelper.create({
-    text: 'WORD',
+    text: 'NAME',
     name: 'div',
     id: 'name',
-    className: 'cell',
+    className: ['cell', 'title-cell'],
     handleClick: handleSorting,
   });
 
@@ -182,7 +182,7 @@ const createColumns = (navigateToRepeatWords) => {
     text: 'TRANSLATION',
     name: 'div',
     id: 'translation',
-    className: 'cell',
+    className: ['cell', 'title-cell'],
     handleClick: handleSorting,
   });
 
@@ -190,7 +190,7 @@ const createColumns = (navigateToRepeatWords) => {
     text: 'CATEGORY',
     name: 'div',
     id: 'category',
-    className: 'cell',
+    className: ['cell', 'title-cell'],
     handleClick: handleSorting,
   });
 
@@ -198,23 +198,23 @@ const createColumns = (navigateToRepeatWords) => {
     text: 'CLICKED',
     name: 'div',
     id: 'clicked',
-    className: 'cell',
+    className: ['cell', 'title-cell'],
     handleClick: handleSorting,
   });
 
   const correct = HtmlHelper.create({
-    text: 'CORRECT %',
+    text: 'CORRECT',
     name: 'div',
     id: 'correct',
-    className: 'cell',
+    className: ['cell', 'title-cell'],
     handleClick: handleSorting,
   });
 
   const wrong = HtmlHelper.create({
-    text: 'WRONG %',
+    text: 'WRONG',
     name: 'div',
     id: 'wrong',
-    className: 'cell',
+    className: ['cell', 'title-cell'],
     handleClick: handleSorting,
   });
 

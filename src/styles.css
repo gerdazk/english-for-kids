@@ -350,3 +350,7 @@ input:checked + .slider .train {
   display: flex;
   overflow: auto;
 }
+
+.title-cell {
+  cursor: pointer;
+}

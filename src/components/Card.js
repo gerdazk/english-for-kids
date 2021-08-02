@@ -93,7 +93,6 @@ const create = (parentId, categoryData) => {
 
   const imageContainer = HtmlHelper.create({
     name: 'div',
-    className: 'image-container',
   });
 
   const image = HtmlHelper.create({
