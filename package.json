@@ -4,7 +4,8 @@
   "description": "",
   "private": true,
   "scripts": {
-    "dev": "webpack serve --config ./webpack.config.js"
+    "dev": "webpack serve --config ./webpack.config.js",
+    "build": "npx webpack --config webpack.config.js --mode=production"
   },
   "repository": {
     "type": "git",

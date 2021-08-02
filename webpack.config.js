@@ -4,7 +4,7 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  mode: "development",
+  mode: "production",
   entry: "./src/index.js",
   output: {
     filename: "main.js",
@@ -19,12 +19,11 @@ module.exports = {
       patterns: [{ from: "src/assets", to: "assets" }],
     }),
   ],
-
-  devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    compress: true,
-    port: 9001,
-  },
+  // devServer: {
+  //   contentBase: path.join(__dirname, "dist"),
+  //   compress: true,
+  //   port: 9001,
+  // },
   module: {
     rules: [
       {
