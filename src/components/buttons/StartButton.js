@@ -2,6 +2,7 @@ const HtmlHelper = require('../../utils/HtmlHelper');
 const LocalStorage = require('../../utils/LocalStorage');
 const SoundPlayer = require('../../utils/SoundPlayer');
 const Words = require('../../utils/Words');
+const BaseButton = require('./BaseButton');
 
 const resetDisabled = () => {
   const disabled = document.getElementsByClassName('disabled');
@@ -54,17 +55,7 @@ const handleClick = () => {
 };
 
 const create = () => {
-  HtmlHelper.append(
-    document.body,
-    HtmlHelper.create({
-      name: 'button',
-      text: 'start game',
-      id: 'start',
-      handleClick,
-      className: 'button-blue',
-    }),
-  );
-  HtmlHelper.toggleVisibility('start', false);
+  BaseButton.create('start', 'start game', handleClick);
 };
 
 module.exports = { create };

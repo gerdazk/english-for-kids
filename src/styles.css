@@ -190,10 +190,11 @@ input:checked + .slider .train {
 .menu-container {
   position: absolute;
   top: 0;
-  left: -15em;
+  left: 0;
+  transform: translateX(-15em);
   background-color: #f2f9ff;
   margin: 0;
-  transition: left 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
   list-style-type: none;
   padding: 0;
   z-index: 2;
@@ -202,7 +203,7 @@ input:checked + .slider .train {
 }
 
 .show {
-  left: 0em;
+  transform: translateX(0);
 }
 
 .menu-button {

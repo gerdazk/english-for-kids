@@ -1,18 +1,7 @@
-const HtmlHelper = require('../../utils/HtmlHelper');
+const BaseButton = require('./BaseButton');
 
 const create = (handleClick) => {
-  if (HtmlHelper.getElement('repeat')) return;
-  HtmlHelper.append(
-    document.body,
-    HtmlHelper.create({
-      name: 'button',
-      text: 'Repeat difficult words',
-      id: 'repeat',
-      handleClick,
-      className: 'button-blue',
-    }),
-  );
-  HtmlHelper.toggleVisibility('repeat', false);
+  BaseButton.create('repeat', 'Repeat difficult words', handleClick);
 };
 
 module.exports = { create };
